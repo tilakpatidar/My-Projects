@@ -1,0 +1,8 @@
+testThread.py :General Multithreaded Crawler
+ver1.0	:Simple recursion based crawler for dir.yahoo.com writes links into a file.
+ver2.0	:Simple recursion based crawler for dir.yahoo.com writes links into a file.
+	getPopularLinks.py fetches links from crawl.txt and findes popular links on dir.yahoo.com
+	Popular Links are written to a file.
+ver3.0	:Simple recursion based crawler for dir.yahoo.com,crawls and finds popularLink simultaneously writes links 		into a file.
+QueueExp:Experiment done to limit number of threads.
+ver5.0:	STABLE:recursion based adds links and popularLinks to db.

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="js/jQuery.js"></script>
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" href="css/index.css" rel="stylesheet"/>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script type="text/javascript">
+            function capLock(e){
+             kc = e.keyCode?e.keyCode:e.which;
+             sk = e.shiftKey?e.shiftKey:((kc == 16)?true:false);
+             if(((kc >= 65 && kc <= 90) && !sk)||((kc >= 97 && kc <= 122) && sk)){
+                 $("#caps").show();
+              document.getElementById('caps').innerHTML="Caps Lock On";
+          }
+          
+             else{
+               
+              $("#caps").hide();
+        }
+            }
+            function containsChar(val)
+{
+    var filter=/.*[a-zA-Z]+.*/;
+    if(filter.test(val))
+    {
+        //contains char
+        return 1;
+    }
+    else
+    {
+        return 0;
+        //only num
+    }
+}
+            function containsNum(jqcomp){
+    var l=$(jqcomp).val().length;
+    var a=0;
+    var count=0;
+    while(a<l)
+    {
+      
+        var t=$(jqcomp).val().charAt(a);
+        if(!isNaN(t))
+        {
+            count++;
+            
+        }
+        a++;
+    }
+    if((count!==l)&&(count>0))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+    
+    
+    
+}
+                        function checkSpecialChar(str){
+                        var filter=/^\s*[a-zA-Z0-9,\s]+\s*$/;
+                        if (filter.test(str))
+                        {
+                            //nsp
+                            return 0;
+                        }
+                        else
+                        {
+                            //sp
+                            return 1;
+                        }
+                    }
+            $(document).ready(function(){
+                $("#in_search").focusout(function(){
+                   if(checkSpecialChar($("#in_search").val())===1)
+                   {
+                       $("#in_search").val("");
+                       alert("Special characters not allowed");
+                   }
+                });
+            });
+            //password focusout
+                $(document).ready(function(){                    
+                    $("#password").focusout(function(){
+                         if(($("#password").val()===$("#username").val()))
+                        {
+                            $("#spassword").show();
+
+                            document.getElementById("spassword").innerHTML="Password must not be same as username or email.";
+                            $("#password").val("");
+                            
+                            $("#username").val("");
+
+                        }
+                        
+                        else if((($("#password").val().length)>=8)&&(containsNum("#password")===1))
+                        {
+                          //fav cond
+                           $("#spassword").hide();
+
+                           document.getElementById("spassword").innerHTML="Password must be alpha-numeral and minimum 8 characters in length.";
+                           
+                           
+
+                        }
+
+                        else{
+                             $("#password").val('');
+                             $("#spassword").show();
+                              document.getElementById("spassword").innerHTML="Password must be alpha-numeral and minimum 8 characters in length.";
+
+                        }
+                    });
+                });
+                
+                //username focus out
+$(document).ready(function(){
+    $("#username").focusout(function(){
+        
+        $("#username").val($("#username").val().trim());
+        $('#username').val($('#username').val().toLowerCase());
+        if(($("#password").val()===$("#username").val()))
+        {
+            $("#spassword").show();
+           
+            document.getElementById("spassword").innerHTML="Password must not be same as username or email.";
+            $("#password").val("");
+            
+        
+        }
+        else if(containsChar($("#username").val())===0)
+        {
+            $("#username").val("");
+            $("#spassword").show();
+            document.getElementById("spassword").innerHTML="Username must contain atleast one character.";
+        }
+        
+        else if(($("#username").val()!=="Enter your User Name")&&($("#username").val()!==""))
+        {
+            $("#spassword").hide();
+        }
+        
+       
+    }); 
+});
+        </script>
+    </head>
+    <body>
+        
+        <div id="top">
+            <div id="logo_area"></div>
+            
+        <div id="login_box">
+            
+        <label id="mem_login">Members Login</label>
+        <form name="frm" action="/cgi-bin/auth.py" method="POST" id="frm">
+            <br/><br/>
+            <label id="lusername">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter your Username">
+            <br>
+            
+            <label id="lpassword" >Password</label>
+            <input type="password" name="password" onkeypress="capLock(event)" id="password" placeholder="Enter your Password">
+            <label class="slabels" id="caps"></label>
+            <br/><br/>
+            
+            <label class="slabels" id="spassword"></label><br>
+            
+            <a href="">Trouble logging in !</a><br/>
+            Not a user yet?
+            <a href="register.html" class="fields">Join Now!</a><br/><br/>
+            <input type="submit" value="Login" id="login">
+            <input type="reset" value="Cancel" id="reset">
+        </form>
+   
+</div>
+        <div id="left">
+        
+            <form id="search" name="search" action="py/auth.py" method="POST">
+            
+            <input type="text" size="70" id="in_search" name="in_search" placeholder="Search a member by name">
+            <input type="submit" id="submit" name="submit" value="Search">
+        </form>
+            
+            <table id="tbl" border="1">
+                <tr>
+                    <td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td>
+                </tr>
+            </table>
+        </div>
+        </div>
+            
+        <div id='about_us'> 
+            
+            <a href="aboutus.html"><label id="abt_us">About Us</label></a>
+        </div>
+    </body>
+</html>

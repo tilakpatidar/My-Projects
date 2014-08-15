@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" href="css/register_policy.css" rel="stylesheet"/>
+        <script type="text/javascript" src="js/jQuery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                 $("#jsbar").attr("class","hidden");
+         
+                 $("#body").attr("class","visible");
+                
+             });
+        </script>
+    </head>
+    <body id="body">
+    <p id="jsbar" class="visible">This website works on JavaScript !<br/>
+        Please enable it !</p>
+
+<table   cellpadding="2" cellspacing="1" class="tbl_generic">
+  <tbody>
+ 
+    <tr>
+      <th align="center">Policy</th>
+    </tr>
+	 <tr><td>
+          <table cellspacing="1" cellpadding="2" style="font-size:12px;" class="tbl_generic">
+          <thead>
+                   <tr>
+            <th>Field</th>
+            <th>Description</th>
+            
+          </tr></thead>
+         <tbody>  
+       <tr>
+         <td>First Name</td>
+         <td>First Name must be max 45 characters long and must not contain[0-9][!-)].</td>
+       </tr>
+       <tr>
+         <td>Last Name</td>
+         <td>Last Name must be max 45 characters long and must not contain[0-9][!-)].</td>
+       </tr>
+       
+       <tr>
+         <td>User Name</td>
+         <td>User name must be alpha-numeral and must have maximum 25 characters.
+         User name must not be same as password.</td>
+       </tr>
+       <tr>
+         <td>Email address</td>
+         <td>Email address must not be same as password.</td>
+       </tr>
+      
+       <tr>
+       	 <td>Profile Name</td>
+       	 <td>Profile name must be of maximum 90 characters.<br/>
+         Others will know you by this name on the network.</td>
+       </tr>
+        <tr>
+       	 <td>Enter Password</td>
+       	 <td>Password must be alpha-numeral and minimum 8 characters in length.<br/>
+             There is no bondage on uppercase or lowercase.<br/>
+             Password must not be same as username or email.<br/>
+         </td>
+       </tr>
+        <tr>
+       	 <td>Create my own question!</td>
+       	 <td> Max 30 characters allowed.</td>
+       </tr>
+       
+       
+	</tbody>
+      </table></td>
+    </tr>	
+		</tbody>       
+</table>
+<div align="center"><input name="button" type="button" onclick="window.close();" value="  Close  " class="bt" /></div>	
+</body>
+
+</html>

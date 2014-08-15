@@ -1,0 +1,141 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2 Jun, 2014, 4:17:30 AM
+    Author     : tilak
+*/
+#warning{
+    
+    position: fixed;
+    left: 30%;
+    right: 30%;
+    bottom:  2px;
+}
+.row{
+    padding-left:20px;
+}
+#lmob3{
+    margin-left: 90px;
+}
+#llname{
+    margin-left: 70px;
+}
+#ldob{
+    margin-left: 70px;
+}
+#lemail{
+    margin-left: 70px;
+}
+#lalt_name{
+    margin-left: 70px;
+}
+#place_cc_year{
+    margin-left: -140px;
+    width: 100px;
+    height: 35px;
+}
+.flabels{
+   
+    padding-right: 15px;
+    width: 200px;
+}
+
+.head{
+    font-size:x-large;
+}
+#big_head{
+    font-size:300%;
+    border-style:solid;
+    border-top:#0088cc;
+    border-left: #0088cc;
+    border-right: #0088cc;
+    border-width: 3px;
+    border-bottom-color:#0088cc;
+    padding-bottom: 2px;
+}
+.select{
+    margin-top: 10px;
+}
+#lplace_ob_year{
+    margin-left: 20px;
+}
+#place_ob_year{
+    margin-left: -150px;
+}
+#lplace_cc_year{
+    margin-left: 20px;
+}
+
+#select_img{
+    width: 250px;
+}
+
+.fields{
+    
+    width: 200px;
+    height: 35px;
+}
+#left{
+    
+   
+   width: 70%;
+   padding-left: 40px;
+   padding-top: 140px;
+    background-color:#eeeeee;
+   background-size:cover;
+  
+}
+
+#upload_img2 {
+    
+    
+    width: 30%;
+    padding-top: 80px;
+     background-color:#eeeeee;
+   background-size:cover;
+}   
+
+    
+    
+
+
+#top{
+    
+    text-align:center;
+    background-color:black;
+    height: 40px;
+    
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+
+
+
+
+
+
+#body{
+   background-color:#eeeeee;
+   background-size:cover;
+   
+}
+    
+#bottom{
+    
+    background-color:black;
+   background-size:cover;
+    height:40px;
+    margin-right: -10px;
+    margin-left: -10px;
+    
+    
+
+}   
+
+     

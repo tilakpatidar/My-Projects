@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>www.blah.com</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+          <script type="text/javascript" src="js/jQuery.js"></script>
+          <script type="text/javascript" src="js/sendMessage.js"></script>
+          <script type="text/javascript">
+                    function addContact(str){
+                                    var url=window.location;
+                                        var url=url.toString().split("=");
+                                        var user="";
+                                        //runs when url has ?=
+                                        if(url.length===2){
+                                            var user=url[1].toString();
+                                            $("contact_selected").html("<img style='margin-left: 2px;' class='img-thumbnail' src='images/user.png' width='50' height='50' alt=''/><label class='label label-primary' style='font-size: small;'>Tilak Patidar</label>");
+                                        }
+      }
+          </script>
+           <script type="text/javascript" src="bootstrap-3.1.1-dist/js/bootstrap.js"></script> 
+          <link href="bootstrap-3.1.1-dist/css/bootstrap.css" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap.css.map" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap-theme.css" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap-theme.css.map" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+       <link type="text/css" href="css/sendMessage.css" rel="stylesheet"/>
+       <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+       
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" /> 
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/base/jquery-ui.css">
+
+
+  <script type="text/javascript" src="js/jquery.ui.autocomplete.html.js"></script>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+        
+        <div class="alert alert-danger" id="warning"><strong>Oh Snap !</strong> This website works on JavaScript ! Please enable it !</div> 
+        <div id="top" class="row">
+        <nav id="navbar1"  class="navbar navbar-default navbar-inverse navbar-fixed-top  " role="navigation">
+             <form method="POST" action="cgi-bin/search.py">
+             <div id="navbar"  class="container-fluid">
+                 <div class="row" style="margin-left: 10px;float: left;width: 30%;">
+		<ul class=" nav nav-pills  ">
+                                    <li class="active">
+                                      <a href="homePage.py">
+                                        <span class="glyphicon glyphicon-home"></span>
+                                        Home
+                                      </a>
+                                    </li>
+                                    
+                                    
+                                    <li class="active">
+                                      <a href="UserProfile.py">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        Profile
+                                      </a>
+                                    </li>
+
+                                    
+                                 
+                                    <li class="active ">
+                                      
+                                        <a href="messages.py" >
+                                        Messages <span class="badge">42</span>
+                                        </a> 
+                                    </li>
+                                    
+                                    
+                                    
+                                  </ul>
+                                
+                 </div>
+                
+                
+                 
+                 
+               
+                            <div class="btn-group nav nav-pills" style="width:250px;float: right; ">
+                                
+                                <button type="button" style=""  class="btn btn-primary dropdown-toggle"  data-toggle="dropdown">
+                                Account <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu">
+                                  <li><div style="width: 250px;height: 120px;"><div style="float: left;"><img style="margin-left: 2px;" class="img-thumbnail" src="/images/user.png" width="110" height="110" alt=""></div><div style="float: right;height: 110px;"><label class="label label-primary " style="font-size: medium; margin-right: 7px; " >Tilak Patidar</label><br/><label class="label label-default" style="font-size:xx-small;">1031310537</label></div></div></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-lock"></span> Account Settings</a></li>
+                                
+                                <li class="divider"></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
+                              </ul>
+                                
+                            </div>
+                            
+                 <div style="margin-top:5px;margin-left: 10px;margin-right: 10px;width: 35%;"  class="input-group ">
+                                            <input type="text" class="form-control autocompleteform-control" autocomplete="off" name="search" id="search" placeholder="Search our members">
+                                            <span class="input-group-addon glyphicon glyphicon-search"></span>
+                                          </div>
+                              
+                    
+                 
+                 
+             </div>
+                   
+                    
+                    
+                 </form>
+                </nav>
+        
+        
+        </div>
+        <div class="row" id="middle"  >
+                        <div class="jumbotron" style="height: 230px;float: top;border-bottom:cornflowerblue;border-bottom-width: thick;border-bottom-style:solid;" >
+                               <div id="img" class="thumbnail" style="float: right;  background-image: url('/images/user.png');background-size:contain,cover;background-repeat: no-repeat;width: 140px;height: 160px;" >
+                                   <label class="label label-default">1031310537</label></div>
+
+                               <div class="row" style="float: left;"> <h1>Tilak Patidar</h1>
+                               </div>
+                        </div>
+
+                        <div id="middle_btm" style="height: 970px;float: bottom;">
+                            <div class="jumbotron" style="height:200px;float: bottom;">
+                                    <div class="" style="width: 40%;height:600px; float: left;">
+                                                 <ul style="height: 600px; width: 100%;" class="list-group pre-scrollable">
+                                   
+                                    <li class="list-group-item  " >
+                                             <a href="#">
+                                                 <blockquote>
+                                             
+                                              <img style="margin-left: 2px;" class="img-thumbnail" src="images/user.png" width="50" height="50" alt=""/>
+                                              
+                                             
+                                              <label class="label label-primary" style="font-size: small;">Tilak Patidar</label>
+                                              <span class="badge" style="font-size:medium;">42</span>
+                                             
+                                                 </blockquote>
+                                                 </a>
+                                        
+                                    </li>
+                                          <li></li>
+                                </ul>   
+                                </div>   
+                                <div class="" style=" width: 50%;height: 600px;float: right;">
+                                        <label class="label label-primary center-block" style="text-align:left;font-size: larger;"><strong>To:</strong></label>
+                                        <br/>
+                                        <div style="margin-left: 10px;margin-right: 10px;"  class="input-group ">
+                                            <input type="text" class="form-control autocompleteform-control" autocomplete="off" name="add" id="add" placeholder="Add Contacts">
+                                            <span class="input-group-addon glyphicon glyphicon-search"></span>
+                                          </div>
+                                            <div style="margin-left: 10px;margin-right: 10px;"  class=" ">
+                                               <blockquote id="contact_selected" >
+                                            
+                                                         <img style="margin-left: 2px;" class="img-thumbnail" src="images/user.png" width="50" height="50" alt=""/>
+                                              
+                                                          <label class="label label-primary" style="font-size: small;">Tilak Patidar</label>
+                                          
+                                           
+                                          </blockquote>
+                                        </div>          
+                                        <div style="margin-top: 40px;margin-left: 10px;margin-right: 10px;"  >
+                                            <ul style="height: 200px;" class="list-group pre-scrollable">
+                                                <li class="list-group-item" style="background-color:#ffff99;">
+                                          <blockquote >
+                                            <p style="font-size: small;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                            
+                                          <div style="float:right;"><span class="glyphicon glyphicon-flag"></span></div><div style="float: left;"><footer>You<br/><p style="font-size: smaller;">7:00pm</p></footer>
+                                            </div>
+                                          </blockquote></li>
+                                          
+                                          <li class="list-group-item"><blockquote class="blockquote-reverse" >
+                                              
+                                            <p style="font-size:small;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                            <div style="float:left;"><span class="glyphicon glyphicon-flag"></span></div><div style="float: right;"><footer>You<br/><p style="font-size: smaller;">7:00pm</p></footer>
+                                            </div> </blockquote>
+                                          </li>
+                                      <li class="list-group-item">Morbi leo risus</li>
+                                      <li class="list-group-item">Porta ac consectetur ac</li>
+                                      <li class="list-group-item">Vestibulum at eros</li>
+                                    </ul>
+                                            <br/>
+                                            <label style="text-align:left;font-size: larger;" class="label label-success center-block">Reply</label>
+                                            <br/>
+                                            
+                                           
+                                            <textarea id="msg" class="form-control" rows="3" placeholder="Reply . . ."></textarea>
+                                            <br/>
+                                             <button class="btn btn-danger" style="float: right;width:150px;margin-left: 20px;"><span class="glyphicon glyphicon-remove"></span> Clear</button>
+                                              
+                                             <button id="send"  class="btn btn-primary" style=" float: right;width:150px;"><span class="glyphicon glyphicon-send"></span> Reply</button>
+                                           
+                                        </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+          
+        </div>
+        <div class="row" id="bottom" style="margin-top: 20px;">
+                    <nav id="nav_btm" class="navbar navbar-default navbar-inverse navbar-fixed-bottom   " role="navigation">
+                       
+                       
+                        <div class="fb-like" style="float: left; margin-top: 10px;margin-left: 5px;" data-href="https://www.facebook.com/srmse" data-layout="standard" data-action="like" data-show-faces="false" data-colorscheme="dark" data-share="true"></div>
+                     
+                      <div style="float: right;margin-top: 10px;">
+                                    <div class="g-plusone" align="right" data-annotation="inline" data-width="300"></div>
+
+                                    <script type="text/javascript">
+                                      (function() {
+                                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                        po.src = 'https://apis.google.com/js/platform.js';
+                                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                      })();
+                                    </script>
+                      </div>
+                    </nav>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,93 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 9 May, 2014, 2:59:09 AM
+    Author     : tilak
+*/
+.slabels{
+    font-size:smaller;
+    font-weight:200;
+    
+}
+#warning{
+    
+    position: fixed;
+    left: 30%;
+    right: 30%;
+    bottom:  2px;
+}
+.big_head{
+    font-size:x-large;
+}
+.combo{
+    height: 25px;
+    margin-right: 10px;
+}
+#sec_q{
+    width: 400px;
+    
+}
+#work{
+    width: 400px;
+    height: 60px;
+}
+#lfname{
+    margin-right: 2px;
+}
+#llname{
+    margin-right: 2px;
+}
+.labels{
+    font-size:large;
+    font-weight:500;
+    margin-right: 10px;
+}
+.help{
+    font-size:smaller;
+    font-weight:100;
+    margin-right: 10px;
+}
+.text_fields{
+    width: 200px;
+    padding-left: 5px;
+}
+
+
+#upload_img{
+    float: right;
+    padding-top: 8%;
+    
+    width: 320px;
+}
+#top{
+    height: 40px;
+ 
+    background-color:black;
+   background-size:cover;
+    
+}
+#bottom{
+    
+    
+    background-color:black;
+   background-size:cover;
+    height:40px;
+    
+    margin-right: -10px;
+    margin-left: -10px;
+}
+#middle{
+      background-color:#eeeeee;
+    background-size:contain;
+    
+    padding-top: 10%;
+    padding-bottom: 30%;
+    padding-left: 40px;
+}
+#body{
+    background-color:#eeeeee;
+   background-size:cover;
+}

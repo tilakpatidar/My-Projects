@@ -1,0 +1,82 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10 Jun, 2014, 5:28:04 PM
+    Author     : tilak
+*/
+
+.slabels{
+    font-size:smaller;
+    font-weight:200;
+    
+}
+#body{
+    width: 1280px;
+    height:1204px;
+}
+
+#in_search{
+    margin-top: 20px;
+    
+    width:740px;
+    margin-bottom: 20px;
+}
+#top{
+    float: top;
+    height: 1100px;
+}
+#mem_login{
+    font-size:x-large;
+    
+}
+#login_box{
+    width: 375px;
+    float: right;
+    
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 96px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border:#000;
+    border-width:thin;
+    border-style:solid;
+    
+}
+#tbl{
+    
+    width: 840px;
+     height: 456px;
+}
+#left{
+    width: 840px;
+    float: left;
+    height: 456px;
+    margin-top: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+#logo_area{
+    height: 100px;
+    margin-bottom: 10px;
+}
+#about_us{
+    width: 880px;
+   height: 104px; 
+  float: bottom;
+  
+}
+#abt_us{
+    
+    font-size:large;
+    
+    margin-left: 20px;
+    
+    
+}

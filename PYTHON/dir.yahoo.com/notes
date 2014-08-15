@@ -1,0 +1,13 @@
+yahoo stores links by popularity in div class "st"
+ul=''
+a=urlopen("http://www.google.com")
+a=a.read()
+soup = BeautifulSoup(a)
+links = soup.find("div", { "class" : "st" })
+soup = BeautifulSoup(ul)
+links = soup.findAll("a")
+for a in links:
+	print a.attrs['href']
+		
+		
+

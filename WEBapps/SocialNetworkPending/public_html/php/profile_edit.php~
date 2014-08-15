@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/javascript" src="/js/jQuery.js"></script>
+        <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
+        <link href="/bootstrap-3.1.1-dist/css/bootstrap.css" rel="stylesheet" media="screen">
+       <link href="/bootstrap-3.1.1-dist/css/bootstrap.css.map" rel="stylesheet" media="screen">
+       <link href="/bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+       <link href="/bootstrap-3.1.1-dist/css/bootstrap-theme.css" rel="stylesheet" media="screen">
+       <link href="/bootstrap-3.1.1-dist/css/bootstrap-theme.css.map" rel="stylesheet" media="screen">
+       <link href="/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+         <link type="text/css" href="/css/profile_edit.css" rel="stylesheet"/>
+         <script type="text/javascript">
+              var countries;//global connected with getCountries and copyCountries
+              var uname;
+
+		$(function() {
+	
+			//autocomplete
+			$("#lang").autocomplete({
+				source: "search.php",
+				minLength: 1
+			});				
+		 
+		});
+             $(document).ready(function(){
+                 $("#jsbar").hide();
+                 $("#body").show();
+                 
+                 function getUsername(){
+                     return uname;
+                 }
+                 uname="<?php $username=$_GET['username'];echo $username; ?>";
+                 $("#username").val(uname);
+                 <?php
+                    $dbc=mysqli_connect('localhost','root','1','member') or die('Connection Lost !');
+                    $query="SELECT fname, lname, sex, dob, mob1, alt_name, email FROM mem_info where username='$username';--";
+
+                    $result=mysqli_query($dbc,$query) or die('Connection Lost');
+                    $row=  mysqli_fetch_array($result);
+                    $fname=$row['fname'];
+                    $lname=$row['lname'];
+                    $sex=$row['sex'];
+                    $dob=$row['dob'];
+                    $mob1=$row['mob1'];
+                    $alt_name=$row['alt_name'];
+                    $email=$row['email'];
+                    mysqli_close($dbc);
+                    
+                    $dbc1=mysqli_connect('localhost','root','1','member') or die('Connection Lost !');
+                    $query1="SELECT country_name FROM country;--";
+
+                    $result1=mysqli_query($dbc1,$query1) or die('Connection Lost');
+                    $row1=  mysqli_fetch_array($result1);
+                    mysqli_close($dbc1);
+                    
+                    $dbc2=mysqli_connect('localhost','root','1','member') or die('Connection Lost !');
+                    $query2="SELECT lang FROM lang;--";
+
+                    $result2=mysqli_query($dbc2,$query2) or die('Connection Lost');
+                    $row2=  mysqli_fetch_array($result2);
+                    mysqli_close($dbc2);
+                    
+                 ?>
+                         
+                         $("#fname").val("<?php echo ''.$fname;?>");
+                         $("#lname").val("<?php echo ''.$lname;?>");
+                         $("#sex").val("<?php echo ''.$sex;?>");
+                         $("#dob").val("<?php echo ''.$dob;?>");
+                         $("#mob1").val("<?php echo ''.$mob1;?>");
+                         $("#alt_name").val("<?php echo ''.$alt_name;?>");
+                         $("#email").val("<?php echo ''.$email;?>");
+                // $("#place_ht").hide();
+               hoverText("#fname","Enter your First Name");
+                hoverText("#lname","Enter your Last Name");
+                hoverText("#alt_name","Enter your Profile Name");
+                hoverText("#username","Enter your User Name");
+                hoverText("#email","Enter your email address");
+                hoverText("#pswd1","Enter your password");
+                hoverText("#pswd2","Confirm your password");
+                hoverText("#mob1","Enter your registered mobile number");
+                hoverText("#mob2","Enter your mobile number");
+                hoverText("#mob3","Enter your mobile number");
+                hoverText("#place_ob","Place of Birth");
+                hoverText("#website","Enter your website's or blog's url");
+                $("#place_ob").hide();
+                $("#place_cc").hide();
+                $("#place_ht").hide();
+                
+              
+              //  var q1=new addCountries("#place_ob_c");
+                
+              //  var q2=new addCountries("#place_cc_c");
+                
+              //  var q3=new addCountries("#place_ht_c");
+                
+              //  insertYears("#place_lived_year");
+             });
+                $(document).ready(function(){
+                 $("#place_ob_c").click(function(){
+                     var selected=$("#place_ob_c").val();
+                     addCities("#place_ob",selected);
+                     $("#place_ob").show();
+                 });
+             });
+             $(document).ready(function(){
+                 $("#place_cc_c").click(function(){
+                     var selected=$("#place_cc_c").val();
+                     addCities("#place_cc",selected);
+                     $("#place_cc").show();
+                 });
+             });
+             
+             
+             function addCountries(comp){
+                 var country;
+                  if (window.XMLHttpRequest)
+                            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp2=new XMLHttpRequest();
+                            
+                            }
+                        else
+                          {// code for IE6, IE5
+                          xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+                          }
+                          xmlhttp2.onreadystatechange=function()
+                        {
+                                    if (xmlhttp2.readyState===4 && xmlhttp2.status===200)
+                                      {
+                                            country=xmlhttp2.responseText;
+                                            var Country_ary=country.split(";");
+                                            Country_ary.splice(-1,1);
+                                             var n=Country_ary.length;
+                                                var a=0;
+                                                while(a<n)
+                                                {
+
+                                                    var option = new Option(Country_ary[a],Country_ary[a]);
+                                                    $(comp).append($(option));
+                                                    a++;
+                                                }
+                                      }
+                        };
+                         
+                            
+                            
+                          xmlhttp2.open("GET","php/getCountry.php",true);
+                          xmlhttp2.send();
+             }
+             
+             function addCities(comp,country){
+                     var cities;
+                  if (window.XMLHttpRequest)
+                            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp3=new XMLHttpRequest();
+                            
+                            }
+                        else
+                          {// code for IE6, IE5
+                          xmlhttp3=new ActiveXObject("Microsoft.XMLHTTP");
+                          }
+                          
+                          xmlhttp3.onreadystatechange=function()
+                            {
+                            if (xmlhttp3.readyState===4 && xmlhttp3.status===200)
+                              {
+                                 
+                                cities=xmlhttp3.responseText;
+                                var City_ary=cities.split(";");
+                                City_ary.splice(-1,1);
+                                $(comp).html("");
+                                
+                                
+                                
+                                var n=City_ary.length;
+                                var a=0;
+                                while(a<n)
+                                {
+                                    
+                                    var option = new Option(City_ary[a],City_ary[a]);
+                                    $(comp).append($(option));
+                                    a++;
+                                }
+                                
+                              
+                              
+                             
+                              }
+                             };
+                            
+                          xmlhttp3.open("GET","php/getCities.php?country="+country,true);
+                          xmlhttp3.send();
+                 
+                 }    
+             function insertYears(comp){
+                 $(comp).html("");
+                 var i=1900;
+                 while(i<=2015)
+                 {
+                     
+                      var option = new Option(i,i);
+                                    $(comp).append($(option));
+                                    i++;
+                 }
+             }
+             
+             
+             
+             function imgSubmit(){
+                    if($("#select_img").val()!=="")
+                    {
+                          if (window.XMLHttpRequest)
+                            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                            
+                            }
+                        else
+                          {// code for IE6, IE5
+                          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                          }
+                          
+                          xmlhttp.onreadystatechange=function()
+                            {
+                            if (xmlhttp.readyState===4 && xmlhttp.status===200)
+                              {
+                                  
+                             
+                             alert(xmlhttp.responseText);
+                            
+                              }
+                             };
+                            
+                          xmlhttp.open("GET","php/uploadFile.php?file="+str,true);
+                          xmlhttp.send();
+                          
+                        
+                    $("#select_img").attr("disabled","");
+                    $("#clear").attr("disabled","");  
+                    }
+    
+    
+}
+            function BytesToKiloBytes(size)
+            {
+                    return Math.round(size/1024);
+                        }
+            function fileSelectHandler() {
+
+                    // get selected file
+                    var oFile = $('#select_img')[0].files[0];
+
+
+
+                    // check for image type (jpg and png are allowed)
+                    var rFilter = /^(image\/jpeg|image\/png)$/i;
+                    if (! rFilter.test(oFile.type)) {
+                        alert('Please select a valid image file (jpg and png are allowed)');
+                        imgClear();
+                        return 0;
+                    }
+                    // check for file size
+                    if (oFile.size > 550 * 1024) {//not greater than 550 KB
+                        //size in bytes
+
+                        var yourSize=BytesToKiloBytes(oFile.size);
+                        alert('Your file size is '+yourSize+'kB.\n Please select a file smaller than 250 kB !');
+                        imgClear();
+                        return 0;
+                    }
+                    return 1;
+            }
+
+            function imgClear(){
+                        $("#img").attr("src","/images/user.png");
+                        $("#img").attr("width","160");
+                        $("#select_img").val("");
+
+            }
+            
+            
+            function readURL(input) {
+    
+            if(fileSelectHandler()===1){
+            
+            if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#img')
+                                .attr('src', e.target.result)
+                                .width(120)
+                                .height(160);
+                        };
+                          
+                        reader.readAsDataURL(input.files[0]);
+                        
+                    
+            }
+            
+            
+           }
+            
+        }
+         </script>  
+        <script type="text/javascript"  src="/js/hoverText.js"></script>
+        <script type="text/javascript" src="/js/typeahead.bundle.js"></script>
+    </head>
+    <body id="body">
+        <div id="top_bar">
+                <input type="button"  class="top_bar_b form-control " id="help" value="Help">
+            </div>
+        <form name="profile" id="profile">
+            
+            
+            <label id="big_head">Complete your Profile</label>
+            
+            <br/>
+            <br/>
+            <div id="left">
+            <label class="head">Profile Information</label>
+           
+            <br/>
+            <br/>
+            <div class="form-inline">
+            <label id="lusername" class="flabels">Username</label>
+            <input class="fields form-control  " type="text" autocomplete="off" disabled="" id="username" name="username"/>
+            
+            
+            
+            <label id="lalt_name" class="flabels">Profile Name</label>
+            <input class="fields form-control" id="alt_name" name="alt_name" type="text" autocomplete="off">
+            <br/><br/>
+            
+            </div>
+            
+            <div class="form-inline">
+            
+            <label id="lmob1" class="flabels">Registered Mobile Number</label>
+            <input class="fields form-control" id="mob1" name="mob1" type="text" autocomplete="off" disabled="">
+            
+            
+            <label id="lemail" class="flabels">Registered email address</label>
+            <input class="fields form-control" id="email" name="email" type="text" autocomplete="off" disabled="">
+            
+            
+        
+            </div>
+            <br/>
+            <br/>
+            <label class="head">Basic Information</label></br>
+            <br/>
+            <br/>
+            <div class="form-inline">
+            <label id="lfname" class="flabels">First Name</label>
+            <input class="fields form-control" type="text" autocomplete="off" disabled="" name="fname" id="fname">
+            
+            <label id="llname" class="flabels">Last Name</label>
+            <input class="fields form-control" type="text" autocomplete="off" disabled="" name="lname" id="lname">
+            <br/><br/>
+            </div>
+            
+            <div class="form-inline">
+            <label id="lsex" class="flabels">Sex</label>
+            <input class="fields form-control" type="text" autocomplete="off" disabled="" name="sex" id="sex">
+            
+            <label id="ldob" class="flabels" >Date of Birth</label>
+            <input class="fields form-control" type="text" autocomplete="off" disabled="" name="dob" id="dob">
+            <br/><br/>  
+            
+            </div>
+            
+            <div class="form-inline">
+            <label id="linterestedin" class="flabels">Interested In</label>
+           
+            <select name="interestedin" class="form-control"> 
+                <option selected="" value="Not Interested">Not Interested</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Both">Both</option>
+            </select>
+            
+            </div>
+            
+            <br/>
+            <br/>
+            <label class="head">Contact Information</label>
+            <br/>
+            <br/>
+            
+            
+            <div class="form-inline">
+            <label id="lmob2" class="flabels">Mobile number 1</label>
+            <input class="fields form-control" id="mob2" name="mob2" type="text" autocomplete="off">
+            
+            <label id="lmob3" class="flabels">Mobile number 2</label>
+            <input class="fields form-control" id="mob3" name="mob3" type="text" autocomplete="off">
+            <br/><br/>
+            </div>
+            
+            <div class="form-inline">
+            <label id="lwebsite" class="flabels">Website/Blog you administer</label>
+            <input class="fields form-control" id="website" name="website" type="text" autocomplete="on">
+            </div>
+            <br/><br/>
+            
+            <br/>
+            
+            <label class="head">Additional Information</label>
+            <br/>
+            <br/>
+            
+            
+            <label id="lplace_ob" class="flabels">Place of Birth</label><br/>
+            <div class="form-inline">
+            <select name="place_ob_c" class="fields form-control"   id="place_ob_c" > </select>  
+            <select name="place_ob" class="fields form-control"   id="place_ob" ></select> 
+            <label id="lplace_ob_year" class="flabels">Year</label>
+            <input class="fields form-control select" type="text" name="place_ob_year" id="place_ob_year" autocomplete="off" disabled="">            </div>
+            <br/>
+            <br/>
+            
+            
+            <label id="lplace_cc" class="flabels">Current City</label><br/><br/>
+            <div class="form-inline">
+            <select name="place_cc_c" class="fields form-control select"  id="place_cc_c" ></select>
+             <select name="place_cc" class="fields form-control select"   id="place_cc" ></select>
+           
+            <br/>
+            </div>
+           
+            
+            
+            
+            <!br/><!br/>
+            
+            
+            
+            <br/><br/>
+            <label id="lplace_ht" class="flabels">Home Town</label><br/><br/>
+            
+            
+            <select name="place_ht_c" class="fields form-control select"   id="place_ht_c" >
+                
+            </select>
+            <br/>
+            
+            <select name="place_ht" class="fields form-control select"   id="place_ht" ></select>
+            <br/><br/>
+           
+            <label id="labout_you" class="flabels">About You</label><br/>
+            <textarea rows="5" cols="60" id="about_you">
+                
+
+            </textarea>
+            
+            
+            <br/>
+            <br/>
+            
+            <label id="llang" class="flabels">Languages you speak</label>
+            <br/><br/>
+            <select name="lang" id="lang" class="fields form-control"></select><br/><br/>
+            <label id="lreligion" class="flabels">Religion you follow</label>
+            <select name="religion" class="fields form-control">
+                <option value="Christianity">Christianity</option>
+                <option value="Islam">Islam</option>
+                <option value="Secular">Secular</option>
+                <option value="Nonreligious">Nonreligious</option>
+                <option value="Agnostic">Agnostic</option>
+                <option value="Atheist">Atheist</option>
+                <option value="Hinduism">Hinduism</option>
+                <option value="Buddhism">Buddhism</option>
+                <option value="Sikhism">Sikhism</option>
+                <option value="Juche">Juche</option>
+                <option value="Spiritism">Spiritism</option>
+                <option value="Judaism">Judaism</option>
+                <option value="Baha'i">Baha'i</option>
+                <option value="Jainism">Jainism</option>
+                <option value="Shinto">Shinto</option>
+                <option value="Cao Dai">Cao Dai</option>
+                <option value="Zoroastrianism">Zoroastrianism</option>
+                <option value="Tenrikyo">Tenrikyo</option>
+                <option value="Neo-Paganism">Neo-Paganism</option>
+                <option value="Unitarian Universalism">Unitarian Universalism</option>
+                <option value="Scientology">Scientology</option>
+            </select>
+            
+            <br/>
+            <br/>
+            
+            
+            
+            </div>
+            <div class="upload_img" id="upload_img2">
+                <label id="lprofile_pic" class="flabels">Profile Picture</label><br/><br/>
+                 <img id="img" alt="Went missing Right!" src="/images/user.png" width="180" height="160"><br/>        
+                <br/>
+                <br/>
+                 <input type="file" class="btn btn-default" onchange="readURL(this);" accept="image/*" id="select_img"  name="img"><br/>
+                 <input type="button" class="btn btn-default" id="upload" onclick="imgSubmit();" value="Upload">
+                <input type="button" class="btn btn-default" id="clear" onclick="imgClear();" value="Clear"><br/>
+                
+                
+                </div>
+            
+        </form>
+        
+    </body>
+</html>

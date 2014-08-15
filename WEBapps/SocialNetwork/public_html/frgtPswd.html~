@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html>
+    <head>
+        <title>www.blah.com</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        
+         <script type="text/javascript" src="js/jQuery.js"></script>
+      
+         <link type="text/css" href="css/index.css" rel="stylesheet"/>
+         <link type="text/css" href="css/frgtPswd.css" rel="stylesheet"/>
+         <script type="text/javascript">
+             $(document).ready(function(){
+                 
+                 $("#warning").hide();
+         
+                 $("#body").show();
+                
+             });
+           
+             function validateForm(){
+                 if(($("#email").val()===""))
+                 {
+                     document.getElementById("warning").innerHTML="<strong>Oh!</strong> Please enter a valid email address !"; 
+                     $("#warning").show().hide(10000);
+                    
+                     return false;
+                 }
+                 else{
+                      $("#warning").hide();
+                    
+                   
+                     return true;
+                 }
+             }
+              
+        
+          
+          
+    
+ function validateEmail(sEmail) {
+    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (filter.test(sEmail)) {
+       
+        return 1;
+    }
+    else {
+         
+        return 0;
+    }
+}
+//email focusout
+$(document).ready(function(){                    
+    $("#email").focusout(function(){
+        $('#email').val($('#email').val().trim());
+        $('#email').val($('#email').val().toLowerCase());
+        var email= $('#email').val().toString();
+        if(validateEmail(email)===0){
+            $('#email').val('');
+             $("#warning").show().hide(5000);
+             document.getElementById("warning").innerHTML="Please enter a valid email address !";
+        }
+        else
+        {
+            $("#warning").hide();
+            document.getElementById("warning").innerHTML="Please enter a valid email address !";
+        }
+        
+    });
+});
+    
+
+ $(function() {
+     $('#request').submit( function() {
+        
+         return validateForm();
+         
+     });
+});
+
+
+           
+           </script>
+           
+       <link href="bootstrap-3.1.1-dist/css/bootstrap.css" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap.css.map" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap-theme.css" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap-theme.css.map" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+       
+    </head>
+    <body  id="body" >
+      
+        
+        <div class="alert alert-danger" id="warning"><strong>Oh Snap !</strong> This website works on JavaScript ! Please enable it !</div> 
+        <div id="top" class="row">
+        
+        
+        
+        </div>
+        <div class="row" id="middle">
+            <form action="cgi-bin/email.py" id="request" method="POST">
+                <label id="lbl">Enter your registered email address</label>
+                <input id="email" name="emailPassword" type="text" class="form-control" placeholder="Enter your registered email address"><br/>
+                <br/>
+                <input type="submit" class="btn btn-primary" id="sbmt" value="Reset my password">
+                <input type="reset" class="btn btn-danger" id="rst" value="Reset">
+            </form>
+      
+        </div>
+        <div class="row" id="bottom"></div>
+       
+    </body>
+</html>
+  
+        

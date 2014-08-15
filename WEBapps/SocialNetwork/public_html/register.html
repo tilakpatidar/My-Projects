@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>www.blah.com</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/javascript" src="js/jQuery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/register.js"></script>
+        <link type="text/css" href="css/register.css" rel="stylesheet"/>
+       
+         
+         <link rel='stylesheet' type='text/css' href='js/libs/bootstrap-datepicker/css/bootstrap-datepicker.css' />
+
+<script type='text/javascript' src='js/libs/bootstrap-datepicker/js/bootstrap-datepicker.js'></script>
+         <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.Jcrop.min.js"></script>
+        <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
+        <script type="text/javascript" src="js/imgPreview.js"></script> 
+              
+       <link href="bootstrap-3.1.1-dist/css/bootstrap.css" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap.css.map" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap-theme.css" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap-theme.css.map" rel="stylesheet" media="screen">
+       <link href="bootstrap-3.1.1-dist/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+       
+        
+    </head>
+    <body id="body">
+              <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+         <form name="register" enctype="multipart/form-data" id="register" autocomplete="off" action="/cgi-bin/register.py" method="POST">
+<div class="alert alert-danger" id="warning"><strong>Oh Snap !</strong> This website works on JavaScript ! Please enable it !</div> 
+        <div id="top" class="row">
+                  <nav id="navbar1"  class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+                <div id="navbar"  class="container-fluid">
+                    <a id="home" class="navbar-brand glyphicon glyphicon-home" href="/">Home</a>
+                    <a id="help" class="navbar-brand glyphicon glyphicon-user  " href="/help.html"> Help</a>
+                    <a id="aboutUs" class="navbar-brand glyphicon glyphicon-info-sign" href="/abt_us.html"> AboutUs</a>
+                    <a id="signin" class="navbar-brand glyphicon glyphicon-log-in" href="/index.html"> SignIn</a>
+                    
+                </div>
+                </nav>
+        
+        
+        </div>
+                          
+                                   <div id="upload_img"><center>
+                                           <img id="img" name="img" alt="Went missing Right!" src="images/user.png" width="160" height="200"><br/>
+                                       
+                                           <input type="file" class="btn btn-default" onchange="readURL(this);" accept="image/*" id="file"  name="file"><br/>
+             <input type="text" name="file_choosen" hidden="" id="file_choosen">                          
+                                       <input type="button" class="btn btn-default" id="clear" onclick="imgClear();" value="Clear"><br/>
+
+                                       </center>
+                                  </div>
+
+                                <div id="middle">
+                                        
+                                      
+                                       
+                                           <label class="big_head">Personal Details</label>
+                                           <br/><br/>
+                                           <div class="form-inline">
+                                       <label class="labels " id="lfname">First Name</label>
+                                       <label class="help">(Max 45 char)</label>
+                                       <input type="text" class="text_fields form-control" autocomplete="off" name="fname" placeholder="Enter your First Name"  id="fname"/>
+                                           </div>
+                                       <br/><br/>
+                                       
+                                       
+                                       <div class="form-inline">
+                                       <label id="llname" class="labels">Last Name</label><label class="help">(Max 45 char)</label>
+                                       <input type="text"  class="text_fields form-control" autocomplete="off" placeholder="Enter your Last Name" name="lname" id="lname"/>
+                                       </div>
+                                       
+                                       
+                                       <br/><br/>
+                                       <label id="lsex" class="labels">Sex</label>
+                                       <label id="lmale" class="labels">Male</label>
+                                       <input type="radio" checked name="sex" value="Male" />
+                                       <label id="lfemale" class="labels">Female</label>
+                                       <input type="radio" name="sex" value="Female" /><br/><br/>
+                                       <br/>
+
+                                        <div class="form-inline">
+                                       <div class="input-append date" id="dp1" data-date="2014-05-05" data-date-format="yyyy-mm-dd">
+                                               <label id="ldob" class="labels">Date of Birth</label>
+                                               <input class="span2 form-control" id="dob" name="dob" size="16" type="text" placeholder="yyyy-mm-dd">
+                                           <span class="add-on"><i class="icon-th"></i></span>
+                                       </div>
+                                        </div>
+                                       
+                                       
+                                            <br/><br/><br/><br/>
+                                       
+                                       <label class="big_head">Academic Details</label>
+                                           <br/><br/>
+                                           <div class="form-inline">
+                                               <label class="labels">Registration Number</label>
+                                                <input type="text" class="text_fields form-control center-block" autocomplete="off" name="regno" placeholder="SRM registration number" id="regno"/>
+                                           </div>
+                                           <br/>
+                                           
+                                           
+                                           
+                                           <div class="form-inline">
+                                       <label id="lyear" class="labels">Year of study</label>
+                                       <select class="combo form-control" name="year" id="year">
+                                           <option value="1">I</option>
+                                           <option value="2">II</option>
+                                           <option value="3">III</option>
+                                           <option value="4">IV</option>
+                                       </select>
+                                       <br/>
+                                       <br/>
+                                           </div>
+                                       
+                                           <div class="form-inline">
+                                           
+                                       <label id="lcategory" class="labels">Category</label>
+                                       <input type="radio" name="category" checked="" value="HR">HR 
+                                       <input type="radio" name="category" value="TECH">TECH<br/><br/>
+                                           </div>
+                                           
+                                           
+                                           
+                                           <div class="form-inline">
+                                       <label id="lvertical" class="labels">Vertical</label>
+                                       <select class="combo form-control" name="vertical">
+                                           <option value="Coding">Coding</option>
+                                           <option value="Architecture">Architecture</option>
+                                           <option value="User Interface">User Interface</option>
+                                           
+                                      </select>
+                                       
+                                           </div>
+                                           
+                                           
+                                           
+                                       <br/><br/>
+                                       
+                                       <div class="form-inline">
+                                       <label id="lposition" class="labels">Current Position</label>
+                                       <select class="combo form-control" id="position" name="position">
+                                       <option value="Intern">Intern</option>
+                                       <option value="Vertical Head">Vertical Head</option>
+
+                                       </select>
+                                       </div>
+                                       <br/>
+                                       <br/>
+                                       
+                                       <div class="form-inline">
+                                       <label id="lwork" class="labels">Current Work</label>
+                                       <label class="help ">(Max 120 char)</label>
+                                       <br/>
+                                       <br/>
+                                       <textarea id="work" class="form-control" name="work" rows="3" cols="40" placeholder="Enter current work you are persuing"></textarea><br/>
+                                       </div>
+                                       <br/><br/>
+					<div class="form-inline">
+                                       <label id="lskill" class="labels">Skills</label>
+                                       <label class="help ">(Max 120 char)</label>
+                                       <br/>
+                                       <br/>
+                                       <textarea id="skill" class="form-control" name="skill" rows="3" cols="40" placeholder="Enter your skills"></textarea><br/>
+                                       </div>
+					<br/>
+                                       <br/>
+					<div class="form-inline">
+                                       <label id="lach" class="labels">Achievements</label>
+                                       <label class="help ">(Max 120 char)</label>
+                                       <br/>
+                                       <br/>
+                                       <textarea id="ach" class="form-control" name="ach" rows="3" cols="40" placeholder="Enter your Achievements(Optional)"></textarea><br/>
+                                       </div>
+
+					<br/><br/>
+                                       
+                                       <label class="big_head">Contact Details</label>
+                                           <br/><br/>
+                                       
+                                       <div class="form-inline">    
+                                           
+                                       <label id="lemail" class="labels">Email Address</label>
+                                       <input type="text" class="text_fields form-control" autocomplete="off" name="email" placeholder="Enter your email address" id="email"/>
+                                       </div>
+                                           
+                                           
+                                       <br/>
+                                       <br/>
+                                       
+                                       <div class="form-inline">
+                                       <label id="lmob" class="labels">Mobile number</label>
+                                       <input type="text" class="text_fields form-control" autocomplete="off" name="mob" id="mob" placeholder="Enter your mobile number"/>
+                                       </div>
+                                       
+                                       <br/>
+                                       <br/>
+                                       <br/>
+                                       <br/>
+                                       <label class="big_head">Profile Details</label>
+                                           <br/><br/>
+                                       <div class="form-inline">
+                                       <label id="lusername" class="labels">Username</label>
+                                       <input type="text" class="form-control"  name="username" autocomplete="off" id="username" placeholder="Enter your username" />
+                                       <a target="_blank" href="register_policy.html" class="help">Username Policy</a>
+                                       </div>
+                                       <br/>    
+                                         
+                                       
+                                       <div class="form-inline">
+                                       <label id="lpswd1" class="labels">Enter Password</label>
+                                       <input type="password" class="form-control"  name="pswd1" id="pswd1" placeholder="***********" />
+                                       <a target="_blank" href="register_policy.html" class="help">Password Policy</a>
+                                       </div>
+                                       <br/>
+
+                                       <div class="form-inline">
+                                       <label id="lpswd2" class="labels" >Confirm Password</label>
+                                       <input type="password" class="form-control" name="pswd2" id="pswd2" placeholder="***********"/>
+                                       </div>
+                                       <br/><br/>
+                                       <br/>
+                                       
+                                       
+                                       <div class="form-inline">
+                                       <label id="lsec_q" class="labels" >Please select a security question</label>
+                                       <select class="combo form-control" name="sec_q"  id="sec_q" >
+                                       <option selected=""  id="o1" value="What is the name of your favorite childhood superhero?">What is the name of your favorite childhood superhero?</option>
+                                       <option id="o2" value="What is the name of your pet?">What is the name of your pet?</option>
+                                       <option  id="o3" value="When did you become dad?">When did you become dad?</option>
+                                       <option  id="o4" value="What is the name of your first school?">What is the name of your first school?</option>
+                                       </select>
+                                       <a href="javascript:createQues()" name="bsec_q" id="bsec_q">Create my own question !</a>
+                                       <input type="text" class="text_fields" hidden="" placeholder="Enter your Security Question"  autocomplete="off"  size="60" id="sec_q2" value=""/>
+                                       </div>
+                                       <br/>
+                                       
+                                       
+                                       <div class="form-inline">
+                                       <label   id="lsec_a" class="labels">Answer</label>
+                                       <input type="text" class="text_fields form-control" placeholder="Enter your Answer" autocomplete="off"   name="sec_a" id="sec_a"/>
+                                       </div>
+                                       <br/>
+                                       <input type="submit" id="submit" class="btn btn-success" name="submit" value="Add my Details"/>
+                                       <input type="reset" id="reset" class="btn btn-danger" value="Reset" />
+
+                                       
+                                   
+                                </div>
+                                <div class="row" id="bottom">
+                                    <nav class="navbar navbar-default navbar-inverse navbar-fixed-bottom  " role="navigation">
+
+                                                                    <div class="fb-like" style="float: left; margin-top: 10px;margin-left: 5px;" data-href="https://www.facebook.com/srmse" data-layout="standard" data-action="like" data-show-faces="false" data-colorscheme="dark" data-share="true"></div>
+
+                                                                  <div style="float: right;margin-top: 10px;">
+                                                                                <div class="g-plusone" align="right" data-annotation="inline" data-width="300"></div>
+
+                                                                                <script type="text/javascript">
+                                                                                  (function() {
+                                                                                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                                                                    po.src = 'https://apis.google.com/js/platform.js';
+                                                                                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                                                                  })();
+                                                                                </script>
+                                                                  </div>
+
+                                                </nav>
+
+                                </div>
+    </form>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" href="admin_login.css" rel="stylesheet"/>
+    </head>
+    <body>
+    <center>
+        <form name="frm" action="/cgi-bin/auth.py" method="POST" id="frm">
+            <label id="head">Login Page</label><br><br>
+            <label id="lusername">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter your Username"><br>
+            
+            <label id="lpassword" >Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter your Password"><br><br>
+            <input type="submit" value="Login" id="submit">
+            <input type="reset" value="Cancel" id="reset">
+        </form>
+    </center>
+    </body>
+</html>

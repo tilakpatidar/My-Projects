@@ -1,0 +1,105 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 9 May, 2014, 2:59:09 AM
+    Author     : tilak
+*/
+#help{
+    font-size:medium;
+    font-weight:600;
+    margin-top: -5px;
+    float: right;
+    
+}
+#aboutUs{
+    font-size:medium;
+    font-weight:600;
+    margin-top: -5px;
+    float: right;
+}
+#signin{
+    font-size:medium;
+    font-weight:600;
+    margin-top: -5px;
+    float: right;
+}
+#home{
+    padding-left: 25px;
+    margin-top: -5px;
+}
+.slabels{
+    font-size:smaller;
+    font-weight:200;
+    
+}
+#warning{
+    
+    position: fixed;
+    left: 30%;
+    right: 30%;
+    bottom:  10%;
+}
+.big_head{
+    font-size:x-large;
+}
+.combo{
+    height: 25px;
+    margin-right: 10px;
+}
+#sec_q{
+    width: 400px;
+    
+}
+
+#lfname{
+    margin-right: 2px;
+}
+#llname{
+    margin-right: 2px;
+}
+.labels{
+    font-size:large;
+    font-weight:500;
+    margin-right: 10px;
+}
+.help{
+    font-size:smaller;
+    font-weight:100;
+    margin-right: 10px;
+}
+.text_fields{
+    width: 200px;
+    padding-left: 5px;
+}
+
+
+#upload_img{
+    float: right;
+    padding-top: 8%;
+    
+    width: 320px;
+}
+#top{
+    
+    
+}
+#bottom{
+    
+    
+   
+}
+#middle{
+      background-color:#eeeeee;
+    background-size:contain;
+    height: 100%;
+    padding-top: 10%;
+    padding-bottom: 30%;
+    padding-left: 40px;
+}
+#body{
+    background-color:#eeeeee;
+   background-size:cover;
+}

@@ -1,0 +1,88 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8 May, 2014, 10:36:43 PM
+    Author     : tilak
+*/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8 May, 2014, 10:36:43 PM
+    Author     : tilak
+*/
+#body{
+   background-image:url("/images/black_gradient.png");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+#top{
+    height:40px;
+   
+}
+#middle{
+   background-color:#eeeeee;
+    background-size:contain;
+    
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+#bottom{
+     background-color:black;
+   background-size:cover;
+    height:40px;
+    
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+#body{
+    background-image:url("/images/black_gradient.png");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.visible{
+    visibility: visible;
+    
+}  
+
+#warn{
+    font-size:xx-large;
+    font-weight:400;
+}
+
+#submit{
+   width: 150px;
+  font-size:medium;
+  margin-top: 30px;
+}
+#luname,#lpswd{
+    width: 150px;
+    margin-top: 30px;
+}
+
+#uname,#pswd{
+    width: 400px;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.hidden{
+    visibility: hidden;
+}
+#warning{
+    
+    position: fixed;
+    left: 30%;
+    right: 30%;
+    bottom:  2px;
+}
+.row{
+    padding-left: 40px;
+}

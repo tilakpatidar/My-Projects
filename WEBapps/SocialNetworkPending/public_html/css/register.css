@@ -1,0 +1,123 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 9 May, 2014, 2:59:09 AM
+    Author     : tilak
+*/
+#sec_q{
+    width:420px;
+}
+#big_head{
+    font-size:300%;
+    border-style:solid;
+    border-top:#0088cc;
+    border-left: #0088cc;
+    border-right: #0088cc;
+    border-width: 3px;
+    border-bottom-color:#0088cc;
+    padding-bottom: 2px;
+    margin-left: 40px;
+}
+#body{
+    
+    background-image:url("/images/black_gradient.png");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+#top{
+    height:40px;
+   
+}
+
+.slabel{
+   // visibility:hidden;
+    margin-left: 20px;
+    font-weight: 200;
+    
+    
+}
+.fields{
+    margin-left: 30px;
+    width: 400px;
+    padding-left: 5px;
+}
+.sex{
+    margin-left: 60px;
+}
+#bsec_q{
+    margin-left: 10px;
+}
+.flabel{
+    
+    padding-left: 60px;
+    font-size:medium;
+    margin-right: 30px;
+    margin-top: 20px;
+    width: 250px;
+}
+.end_buttons{
+   // margin-left: 50px;
+   padding-top: 30px;
+    width: 900px;
+   padding-left: 75px;
+   padding-bottom: 50px;
+}
+#chkbox{
+    padding-left: 40px;
+    margin-left: 50px;
+}
+#txtarea{
+    padding-left: 10px;
+    margin-left: 50px;
+}
+#middle{
+   background-color:#eeeeee;
+    background-size:contain;
+    
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+#bottom{
+     background-color:black;
+   background-size:cover;
+    height:40px;
+    
+    margin-right: -10px;
+    margin-left: -10px;
+}
+.max45{
+    font-size:small;
+}
+.header_top{
+    background-color:#eeeeee;
+    margin-top: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
+    height: 180px;
+    
+}
+
+
+/*.datepicker{
+    position: absolute;
+    margin-left: 600px;
+    margin-top: -20px;
+    background-color:wheat;
+}*/
+.hidden{
+    visibility:hidden;
+    
+}
+.visible{
+    visibility:visible;
+}
+#warning{
+    
+    position: fixed;
+    left: 30%;
+    right: 30%;
+    bottom:  2px;
+}
