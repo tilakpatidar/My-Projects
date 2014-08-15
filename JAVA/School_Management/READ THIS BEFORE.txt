@@ -1,0 +1,10 @@
+FIRST, COPY THE CONTENTS OF MYSQL.TXT INTO MYSQL TERMINAL.
+
+DEFAULT SOFTWARE PASSWORD IS tilak
+
+COPY SchoolManagement.jar and lib folder to use.
+
+Do not run project from netbeans layout will be damaged.
+Always build and run the .jar file.
+
+ENJOY!

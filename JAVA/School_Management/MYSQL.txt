@@ -1,0 +1,151 @@
+create database SVM;
+
+
+use SVM;
+
+
+
+CREATE TABLE admission
+(enroll_no int(10) primary key,
+fname char(20),
+lname char(20),
+class int(2),
+sec char(1),
+sex char(1),
+dob date,
+f_g_name char(20),
+category char(5),
+anincome int(20),
+occupation char(20),
+nationality char(10),
+state char(50),
+address varchar(50),
+phych char(10),
+sib int(10),
+hostel char(3),
+conveyence char(3),
+activity char(10),
+photo TEXT,
+dateofadm date);
+
+
+
+
+
+INSERT INTO admission VALUES('1','Tilak','Patidar','12','B','M','1995-05-05','Subhash Patidar','OBC','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','1','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('2','Ayush','Sharma','11','A','M','1995-05-05','Subhash Sharma','GEN','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','2','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('3','Sourabh','Sharma','10','A','M','1995-05-05','Subhash Sharma','OBC','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','3','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('4','Tushar','Sharma','9','B','M','1995-05-05','Subhash Sharma','GEN','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','4','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('5','Anmol','Sharma','8','B','M','1995-05-05','Subhash Sharma','OBC','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','1','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('6','Piyush','Sharma','7','B','M','1995-05-05','Subhash Sharma','GEN','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','1','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('7','Abhishek','Sharma','6','A','M','1995-05-05','Subhash Sharma','OBC','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','1','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('8','Yash','Sharma','5','B','M','1995-05-05','Subhash Sharma','GEN','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','1','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('9','Ketan','Sharma','4','B','M','1995-05-05','Subhash Sharma','OBC','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','1','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('10','Shubham','Sharma','3','A','M','1995-05-05','Subhash Sharma','GEN','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','1','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('11','Tanmay','Sharma','2','B','M','1995-05-05','Subhash Sharma','OBC','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','1','No','Yes','Karate','','2012-05-05');
+INSERT INTO admission VALUES('12','Surur','Sharma','1','B','F','1995-05-05','Subhash Patidar','GEN','1000000','Buisness','Indian','M.P','B 68 SHASHTRI NAGAR','No','1','No','Yes','Karate','','2012-05-05');
+
+use SVM;
+
+     create table Marks
+     (enroll_no int(10) PRIMARY KEY NOT NULL,
+     PHY1 float CHECK (PHY1 <=100),
+     PHY2 float CHECK (PHY2 <=100),
+     PHY3 float CHECK (PHY3 <=100),
+     C1 float CHECK (C1 <=100),
+     C2 float CHECK (C2 <=100),
+     C3 float CHECK (C3 <=100),
+     M1 float CHECK (M1 <=100),
+     M2 float CHECK (M2 <=100),
+     M3 float CHECK (M3 <=100),
+     B1 float CHECK (B1 <=100),
+     B2 float CHECK (B2 <=100),
+     B3 float CHECK (B3 <=100),
+     E1 float CHECK (E1 <=100),
+     E2 float CHECK (E2<=100),
+     E3 float CHECK (E3<=100),
+     H1 float CHECK (H1<=100),
+     H2 float CHECK (H2<=100),
+     H3 float CHECK (H3<=100),
+     S1 float CHECK (S1<=100),
+     S2 float CHECK (S2<=100),
+     S3 float CHECK (S3<=100),
+     SC1 float CHECK (SC1<=100),
+     SC2 float CHECK (SC2<=100),
+     SC3 float CHECK (SC3<=100),
+     SS1 float CHECK (SS1<=100),
+     SS2 float CHECK (SS2<=100),
+     SS3 float CHECK (SS3<=100),
+     I1 float CHECK (I1<=100),
+     I2 float CHECK (I2<=100),
+     I3 float CHECK (I3<=100));
+
+INSERT INTO Marks (enroll_no) VALUES('1');
+INSERT INTO Marks (enroll_no) VALUES('2');
+INSERT INTO Marks (enroll_no) VALUES('3');
+INSERT INTO Marks (enroll_no) VALUES('4');
+INSERT INTO Marks (enroll_no) VALUES('5');
+INSERT INTO Marks (enroll_no) VALUES('6');
+INSERT INTO Marks (enroll_no) VALUES('7');
+INSERT INTO Marks (enroll_no) VALUES('8');
+INSERT INTO Marks (enroll_no) VALUES('9');
+INSERT INTO Marks (enroll_no) VALUES('10');
+INSERT INTO Marks (enroll_no) VALUES('11');
+INSERT INTO Marks (enroll_no) VALUES('12');
+
+use SVM;
+
+CREATE TABLE fees
+(enroll_no int(10) PRIMARY KEY NOT NULL,
+fees_upto date);
+
+INSERT INTO fees
+VALUES('1','2012-05-05');
+INSERT INTO fees
+VALUES('2','2012-05-05');
+INSERT INTO fees
+VALUES('3','2012-05-05');
+INSERT INTO fees
+VALUES('4','2012-05-05');
+INSERT INTO fees
+VALUES('5','2012-05-05');
+INSERT INTO fees
+VALUES('6','2012-05-05');
+INSERT INTO fees
+VALUES('7','2012-05-05');
+INSERT INTO fees
+VALUES('8','2012-05-05');
+INSERT INTO fees
+VALUES('9','2012-05-05');
+INSERT INTO fees
+VALUES('10','2012-05-05');
+INSERT INTO fees
+VALUES('11','2012-05-05');
+INSERT INTO fees
+VALUES('12','2012-05-05');
+
+use SVM;
+
+CREATE TABLE password
+(password char(20),
+hint char(20));
+
+
+INSERT INTO password
+VALUES('tilak','myname');
+
+
+SELECT * FROM password;
+
+
+use SVM;
+
+CREATE table tinfo
+(id char(10) PRIMARY KEY NOT NULL,
+password char(10) NOT NULL,
+type char(20));
+
+
+
+
+
