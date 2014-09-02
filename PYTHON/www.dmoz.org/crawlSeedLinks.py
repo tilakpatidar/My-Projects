@@ -26,6 +26,12 @@ def getLinks(url):
 	try:
 		html = urllib2.urlopen(str(url))
 		temp=html.read()
+		soup = BeautifulSoup(temp)
+		#Removing other lang
+		#No need if domain is specified such as Arts etc
+		#As links are like dmoz.org/World for lang
+		ul = soup.findAll("ul", { "class" : "language" })
+		temp=temp.replace(str(ul),"")
 		links=re.findall('<a href="?\'?([^"\'>]*)',str(temp))
 		seedLinks(temp)
 		return links
