@@ -1,0 +1,117 @@
+      <div class="table-responsive">
+                          <table class="table table-bordered">
+                              
+                              <thead>COURSEWISE ATTENDANCE</thead>
+                              <tbody>
+                                  <tr style="background-color:white;">
+                                  <th>Code</th>
+                                  <th>Description</th>
+                                  <th>Max. Hours</th>
+                                  <th>Attended Hours</th>
+                                  <th>Absent Hours</th>
+                                  <th>Average %</th>
+                                  <th>OD/ML %</th>
+                                  <th>Total %</th>
+                              </tr>
+                              <tr>
+                                  <td>CS 1003</td>
+                                    <td>DCF</td>
+                                    <td>50</td>
+                                    <td>25</td>
+                                    <td>25</td>
+                                    <td>50</td>
+                                    <td>50</td>
+                                    <td>100</td>
+                              </tr>
+                              <tr style="background-color: white;">
+                                  <td colspan="5" style="text-align:center;">Total</td>
+                                  <td>50</td>
+                                    <td>50</td>
+                                    <td>100</td>
+                              </tr>
+                          </tbody>
+                            </table>
+                                <table class="table table-bordered">
+                              
+                              <thead >CUMULATIVE ATTENDANCE (IN HOURS)</thead>
+                              <tbody>
+                                  <tr style="background-color:white;">
+                                  <th>Month/Year</th>
+                                  <th>Present</th>
+                                  <th>Absent</th>
+                                  <th>OD(Present)</th>
+                                  <th>OD(Absent)</th>
+                                  <th>ML</th>
+                              </tr>
+                              <tr>
+                                  <td>Jul-2014</td>
+                                    <td>148</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                              </tr>
+                            
+                          </tbody>
+                            </table>
+                                     <table class="table table-bordered">
+                              
+                              <thead >LEGEND</thead>
+                              <tbody>
+                                  <tr style="background-color:white;">
+                                  <th>Type</th>
+                                  <th>Description</th>
+                              </tr>
+                              <tr>
+                                  <td>OD-Present</td>
+                                    <td>NCC,NSS (Annual Camp),NSS (Blood Donation),Campus Recruitment Programs,
+Competitive Examinations,Sports Activity,Equivalent Assignment Decided by HOD</td>
+                                   
+                              </tr>
+                              <tr>
+                              <td>OD-Absent</td>
+                              <td>Seminar,Conference,Cultural Actitivity,Intra Department Activity</td>
+                              </tr>
+                              <tr>
+                                  <td>ML</td>
+                                  <td>Medical Leave</td>
+                              </tr>
+                          </tbody>
+                            </table>
+                                  <table class="table table-bordered">
+                              
+                              <thead >OD / ML Calculation details</thead>
+                              <tbody>
+                                  <tr style="background-color:white;">
+                                  <th>Percentage</th>
+                                  <th>Description</th>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      0% to 64.99%
+                                  </td>
+                                  <td>No applicable for OD / ML</td>
+                              </tr>
+                              <tr>
+                                   <td>
+                                      65% to 74.99%
+                                  </td>
+                                  <td>Eligible for OD / ML maximum of 10% added to Actual percentage and make upto 
+75 % only</td>
+                              </tr>
+                              <tr>
+                                  <td>75% to 100%</td>
+                                    <td>Eligible for OD / ML maximum of 25%</td>
+                                   
+                              </tr>
+                              <tr>
+                              <td>OD-Absent</td>
+                              <td>Seminar,Conference,Cultural Actitivity,Intra Department Activity</td>
+                              </tr>
+                              <tr>
+                                  <td>ML</td>
+                                  <td>Medical Leave</td>
+                              </tr>
+                          </tbody>
+                            </table>
+                            </div>

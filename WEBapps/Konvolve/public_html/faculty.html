@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>SRM OD Portal</title>
+        <link rel="shortcut icon" href="/images/fav.ico">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="css/faculty.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    </head>
+    <body>
+       
+        <div id="main">
+            <div class="container" >
+                    
+                                <nav class="navbar navbar-default" role="navigation">
+                                    <div class="container-fluid">
+                                      <!-- Brand and toggle get grouped for better mobile display -->
+                                      <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                          <span class="sr-only">Toggle navigation</span>
+                                          <span class="icon-bar"></span>
+                                          <span class="icon-bar"></span>
+                                          <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand">Faculty Portal</a>
+                                      </div>
+
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                      
+                                      <ul class="nav navbar-nav navbar-right">
+                                       
+                                        <li class="dropdown">
+                                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tilak Patidar <span class="caret"></span></a>
+                                          <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">Account Settings</a></li>
+                                            <li><a href="#">Report Problem</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">LogOut</a></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </div><!-- /.navbar-collapse -->
+                                  </div><!-- /.container-fluid -->
+</nav>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="height: 40%;">
+                             <ul class="nav nav-pills nav-stacked">
+                                 <li><a id="home" class="tabs" href="#">Home</a></li>
+                            <li><a class="tabs" id="attendance" href="#">Attendance</a></li>
+                            <li><a class="tabs" id="rod" href="#">Review OD</a></li>
+                            <li><a class="tabs" id="rml" href="#">Review ML</a></li>
+                            <li><a class="tabs" id="odh" href="#">OD History</a></li>
+                        </ul>
+                    </div>
+                    <div  class="col-lg-9 col-md-9 col-sm-12 col-xs-12" style="height: 100%;" >
+                        <div id="mainArea" class="jumbotron" style="height: 100%;">
+                        <div class="row" style="height: 100%;">
+                                <div class="col-xs-12 col-md-3 col-lg-3 col-sm-12">
+                                  <a  class="thumbnail">
+                                    <img data-src="holder.js/100%x180" alt="...">
+                                  </a>
+                                </div>
+                                <div  class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
+                                <form class="form-horizontal">
+                                            <fieldset>
+                                                 <legend>Faculty Details</legend>
+                                                    <div class="form-group">
+                                                      <label for="inputFname" class="col-lg-2 control-label">First Name</label>
+                                                      <div class="col-lg-10">
+                                                          <input type="text" disabled class="form-control" id="inputFname" placeholder="First Name">
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="inputLname" class="col-lg-2 control-label">Last Name</label>
+                                                      <div class="col-lg-10">
+                                                          <input type="text" disabled class="form-control" id="inputLname" placeholder="Last Name">
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="inputRegNo" class="col-lg-2 control-label">Registration Number</label>
+                                                      <div class="col-lg-10">
+                                                          <input type="text" disabled class="form-control" id="inputRegNo" placeholder="Registration Number">
+                                                      </div>
+                                                    </div>
+                                                 <div class="form-group">
+                                                      <label for="inputBranch" class="col-lg-2 control-label">Branch</label>
+                                                      <div class="col-lg-2">
+                                                          <input type="text" disabled class="form-control" id="inputBranch" placeholder="Branch">
+                                                      </div>
+                                                       <label for="inputSection" class="col-lg-2 control-label">Section</label>
+                                                        <div class="col-lg-2">
+                                                          <input type="text" disabled class="form-control" id="inputSection" placeholder="Section">
+                                                      </div>
+                                                       <label for="inputYear" class="col-lg-2 control-label">Year</label>
+                                                        <div class="col-lg-2">
+                                                          <input type="text" disabled class="form-control" id="inputYear" placeholder="Year">
+                                                      </div>
+                                                    </div>
+                                            </fieldset>
+                                        </form>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                       
+                </div>
+            </div>
+        </div>
+            <div  class="navbar-default navbar-fixed-bottom">
+                <div class="navbar-header">
+                    <a class="navbar-brand" target="blank" href="http://www.srmuniv.ac.in">    <img src="images/logo.png" width="20" height="20"/> SRM University</a>
+                </div>
+                <div class="navbar-right">
+                    <a class="navbar-brand" target="blank" href="http://evarsity.srmuniv.ac.in/srmswi/usermanager/youLogin.jsp">Evarsity</a>
+                     <a class="navbar-brand" target="blank" href="#">Contact Us</a>
+                      <a class="navbar-brand" target="blank" href="#">Help</a>
+                </div>
+   
+            </div>
+        
+</body>
+    <!--Scripts at the end-->
+     <script type="text/javascript" src="js/jQuery/jQuery.js"></script>
+      <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script> 
+         <script type="text/javascript" src="js/faculty.js"></script>
+         
+</html>
