@@ -1,40 +1,34 @@
-import thread,threading,re,os
-from urlparse import urljoin
-import time
-from bs4 import BeautifulSoup
-import urllib2
-start_time = time.time()
-links=[]
-seedlinks=[]
+import threading
 website="http://www.kubuntu.com/"
 Pool=[]
-def seedLinks(code):
-	soup = BeautifulSoup(code)
-	ul = soup.findAll("a")
-	for i in ul:
-		addSeedLinks(str(i.attrs['href']))
-	
-	
+links=[]
 def setProxy():
 	import urllib2
-	proxy_handler = urllib2.ProxyHandler({'http':'172.16.0.2:8080'})
+	proxy_handler = urllib2.ProxyHandler({'http':'172.16.0.19:8080'})
         opener = urllib2.build_opener(proxy_handler)
         urllib2.install_opener(opener)
 
 
 def getLinks(url):
 	try:
+		t=[]
+		from bs4 import BeautifulSoup
+		import urllib2
 		html = urllib2.urlopen(str(url))
 		temp=html.read()
-		links=re.findall('<a href="?\'?([^"\'>]*)',str(temp))
-		seedLinks(temp)
-		return links
+		soup=BeautifulSoup(temp)
+		links=soup.findAll("a")
+		for l in links:
+			t.append(l['href'])
+		return t
 	except Exception as e:
 		print e
 		return None
 		
 
 def cleanUp(parent,url):
+	from urlparse import urljoin
+	import os
 	"""Cleans up url before adding to database"""
 	#check for relative paths
 	if not 'http' in str(url):
@@ -59,33 +53,8 @@ def cleanUp(parent,url):
 	if not "http://www.kubuntu.com/" in url:
 		return ""
 	return url
-
-
-def addSeedLinks(b):
-	"""Adds url and returns True to continue to dwnld"""
-	#first creating a lock
-	try:
-		lock = threading.Lock()
-		lock.acquire()
-	except:
-		#if lock is unsuccessfull return false
-		return False
-	#no errors above so continue
-	try:
-		global seedlinks
-		global foo1
-		if not str(b) in seedlinks:
-			seedlinks.append(str(b))
-			foo1.write(str(b)+"\n")
-			lock.release()
-			return True
-		return False
-	except:
-		lock.release()
-		return False
-
-
 def addLinks(b):
+	import threading
 	"""Adds url and returns True to continue to dwnld"""
 	#first creating a lock
 	try:
@@ -108,42 +77,43 @@ def addLinks(b):
 		lock.release()
 		return False
 
-class Crawl(threading.Thread):
-	url=""
-	def __init__(self,url):
-		threading.Thread.__init__(self)
-		self.url=url
-	def run(self):
-		"""Run method of the thread"""
-		obj=getLinks(self.url)
-		if obj is None:
-			return
-		#getting all anchor tags
-		try:
-			for a in obj:
-				#getting clean links
-				temp=cleanUp(self.url,a)
-				if temp!="":
-					if addLinks(temp):
-						print temp
-						Pool.append(str(temp))
-						#ab=Crawl(str(temp))
-						#ab.start()
-						print "--- %s seconds ---" %(time.time() - start_time)
-		except TypeError:
-			#Raised when obj is None Type
-			pass
+def Crawl(url):
+	"""Run method of the thread"""
+	import threading
+	obj=getLinks(url)
+	if obj is None:
+		return
+	#getting all anchor tags
+	for a in obj:
+		#getting clean links
+		temp=cleanUp(url,a)
+		if temp!="":
+			if addLinks(temp):
+				print temp
+				#first creating a lock
+				try:
+					lock1 = threading.Lock()
+					lock1.acquire()
+				except:
+					#if lock is unsuccessfull return
+					return
+				try:
+					Pool.append(str(temp))
+					lock1.release()
+				except:
+					lock1.release()
 
-setProxy()
+setProxy()#Comment it if no proxy
 foo=open("Links.txt","a")
-foo1=open("Arts.txt","a")
-thread1=Crawl(website)
-thread1.start()
-thread1.join()
+Crawl(website)
 i=0
-while len(Pool)>1:
-	while threading.activeCount()<10:
-		a=Crawl(Pool[i])
-		a.start()
-		Pool[i]=None
-		i+=1
+while True:
+	while threading.activeCount()<20:
+		try:
+			a=threading.Thread(target=Crawl,args=(Pool[i],))
+			a.start()
+			i+=1
+		except IndexError:
+			Crawl(website)
+			continue
+		
