@@ -11,44 +11,79 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+/*
+*Website is the main class of the project.
+*This is breadth wise crawler which crawls web directories breadth wise.
+*Features:
+*Serializable so that crawling can be resumed.
+*Due to breadth wise implementation no loss of pages over resuming.
+*The other classes are :
+*Crawl:To get a links
+*Connect:To get page source
+*Threads:To introduce parrallelism among Website
+*To run the crawler on a website create a new object of class Website.
+*Then run Website.setWebsite(String a)
+*Website.setWebsiteName(String a)
+*obj.init()
+*obj.crawl()
+*You can also set the number of threads running at a time by obj.THREAD_COUNT
+*Inside each thread one breadth is crawled.
+*author@Tilak
+*/
+class Threads extends Thread{
+    Website w;
+    String parent;
+    Threads(){
+        
+    }
+    Threads(Website w,String parent){
+        this.w=w;
+        this.parent=parent;
+    }
+}
 public class Website implements Serializable{
-    static public String website="http://www.dmoz.org"; 
-    static public String websiteName="www.dmoz.org";
-    static public ConcurrentHashMap<String,HashSet<String>> map;
-    static public String encode;
-    static public int THREAD_COUNT=5;
+     private String website; 
+     private String websiteName;
+     private ConcurrentHashMap<String,HashSet<String>> map;
+     private String encode;
+     public int THREAD_COUNT=5;
     Website(){
         System.setProperty("http.proxyHost", "172.16.0.19");
         System.setProperty("http.proxyPort", "8080");
         
         
     }
-    public static void init(){
+    public void init(){
+        
         map=new ConcurrentHashMap<>();
         //Initialize the map set with some values
-        Object[] links=getLinksArray(Website.website);
+        Object[] links=getLinksArray(this.getWebsite());
         if (links!=null)
-            Website.addToDictionary(links);
+            this.addToDictionary(links);
     }
     public void crawl() throws MalformedURLException{
        
        
         Iterator i=map.keySet().iterator();
         while(true){
-            while(i.hasNext() && Thread.activeCount()<Website.THREAD_COUNT){
+            while(i.hasNext() && Thread.activeCount()<this.THREAD_COUNT){
                 String parent=i.next().toString();
-                Thread t=new Thread(parent){
+                System.out.println(parent);
+                Threads t=new Threads(this,parent){
                     
+                    @Override
                     public void run(){
-                            String parent=this.getName();
-                            Object[] set=map.get(parent).toArray();
+                            
+                            Object[] set=w.map.get(this.parent).toArray();
                             for(Object page:set){
+                                
                                 try {
-                                    URL url = new URL(parent);
+                                    URL url = new URL(this.parent);
                                     URL reconUrl = new URL(url, page.toString());
-                                    Object[] links=getLinksArray(reconUrl.toString());
+                                    
+                                    Object[] links=w.getLinksArray(reconUrl.toString());
                                     if (links!=null)
-                                        Website.addToDictionary(links);
+                                        w.addToDictionary(links);
                                 } catch (MalformedURLException ex) {
                                     Logger.getLogger(Website.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -57,16 +92,17 @@ public class Website implements Serializable{
                 };
                 t.start();
             }
-            writeObjectToFile(this);
+           // writeObjectToFile(this);
         }
        
       
     }
-    public static Object[] getLinksArray(String link){
+    public  Object[] getLinksArray(String link){
+        
         Object[] links;
         try{
             Connect c=new Connect(link);
-            links=Crawl.getALinks(c); 
+            links=Crawl.getALinks(c,this.getWebsite());
             //System.out.println(""+Arrays.toString(links));
             
         }
@@ -79,7 +115,7 @@ public class Website implements Serializable{
             return links;
         
     }
-    public static void writeObjectToFile(Website w){
+    public  void writeObjectToFile(Website w){
                 try {
                         FileOutputStream fs = new FileOutputStream("testSer.ser");
                         ObjectOutputStream os = new ObjectOutputStream(fs);
@@ -92,7 +128,7 @@ public class Website implements Serializable{
                         e.printStackTrace(); 
                     }
             }
-    public static void readObjectToFile(String filename){
+    public  void readObjectToFile(String filename){
         try {
                 Website w=new Website();
                 FileInputStream fis = new FileInputStream(filename);
@@ -105,37 +141,37 @@ public class Website implements Serializable{
                 e.printStackTrace(); 
             }
     }
-    public static void addToDictionary(Object[] links){
+    public synchronized void addToDictionary(Object[] links){
         
             for(Object l:links){
                 String temp=l.toString();
                 String[] sp;
                 String[] branches;
                 //System.out.println(temp);
-                if(temp.contains(Website.website)){
-                    sp=temp.split(Website.website);
+                if(temp.contains(this.getWebsite())){
+                    sp=temp.split(this.getWebsite());
                     try{
                         branches=sp[1].split("/");
                     }
                     catch(ArrayIndexOutOfBoundsException e){
                         branches=new String[1];
-                        branches[0]=Website.website;
+                        branches[0]=this.getWebsite();
                     }
-                    String parent=Website.website;
+                    String parent=this.getWebsite();
                     HashSet<String> val;
                     for(String branch:branches){
                         if(!branch.equals("")){
                                 
-                            if(map.containsKey(parent)){
-                                val=map.get(parent);
+                            if(this.map.containsKey(parent)){
+                                val=this.map.get(parent);
                                 val.add(branch);
-                                map.remove(parent);
-                                map.put(parent, val);
+                                this.map.remove(parent);
+                                this.map.put(parent, val);
                             }
                             else{
                                 HashSet<String> set =new HashSet<>();
                                 set.add(branch);
-                                map.put(parent, set);
+                                this.map.put(parent, set);
                                 
                             }
                             parent+="/"+branch;   
@@ -146,14 +182,23 @@ public class Website implements Serializable{
             }
         
     }
-    public void setEncodeType(String a){
-        
-        Website.encode=a;
-    }
-   
+   public void setWebsite(String website){
+       this.website=website;
+   }
+    public void setWebsiteName(String websiteName){
+       this.websiteName=websiteName;
+   }
+   public String getWebsite(){
+       return this.website;
+   }
+   public String getWebsiteName(){
+       return this.websiteName;
+   }
     public static void main(String[] args) throws MalformedURLException{
         Website y =new Website();
-        Website.init();
+        y.setWebsite("http://www.dmoz.org");
+        y.setWebsiteName("www.dmoz.org");
+        y.init();
         y.crawl();
         
     }

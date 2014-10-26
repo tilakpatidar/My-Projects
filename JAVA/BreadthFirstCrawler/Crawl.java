@@ -20,7 +20,7 @@ public class Crawl {
     /**
      * @param args the command line arguments
      */
-    public static Object[] getALinks(Connect c) throws MalformedURLException,IOException{
+    public static Object[] getALinks(Connect c,String website) throws MalformedURLException,IOException{
         String code=c.getCode();
        // System.out.println(code);
         Document doc = Jsoup.parse(code,"UTF-8");
@@ -31,7 +31,7 @@ public class Crawl {
         	//System.out.println(temp);
         	if(!temp.contains("http://")){
         		if(!temp.contains("https://"))
-            		arr.add(Website.website+temp);
+            		arr.add(website+temp);
             	}
             
         }
