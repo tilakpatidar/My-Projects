@@ -1,0 +1,125 @@
+#!/usr/bin/python
+# Import modules for CGI handling 
+import cgi, cgitb,MySQLdb,verify,time,error,json,urllib2
+cgitb.enable()
+text_ids=[]
+video_ids=[]
+file_ids=[]
+course_id=""
+form = cgi.FieldStorage() 
+# Get data from fields
+def escape_string(strr):
+	return MySQLdb.escape_string(urllib2.unquote(strr))
+def updateText(k):
+	d=eval(str(k))
+	try:
+		# Open database connection
+		db1 = MySQLdb.connect("fdb13.runhosting.com","1780205_seekho","tilak05051995","1780205_seekho" )
+		# prepare a cursor object using cursor() method
+		cursor1 = db1.cursor()
+		# execute SQL query using execute() method.
+		sql1 = "INSERT INTO content (`content_title`, `content_desc`, `content_text`, `content_author`) VALUES ('%s', '%s','%s', '%s');"%(escape_string(d['title']),escape_string(d['description']),escape_string(d['text']),author)
+		# Execute the SQL command
+		sql2 = "SELECT LAST_INSERT_ID();"
+		cursor1.execute(sql1)
+		cursor1.execute(sql2)
+		results=cursor1.fetchone()
+		text_ids.append("t"+str(results[0]))
+		db1.commit()
+	except Exception as e:
+		db1.rollback()
+		print 'Content-Type: text/html\n'
+		error.errorMessage("Problem in session creation",e)
+	db1.close()
+	
+def updateFile(k):
+	d=eval(str(k))
+	try:
+		# Open database connection
+		db1 = MySQLdb.connect("fdb13.runhosting.com","1780205_seekho","tilak05051995","1780205_seekho" )
+		# prepare a cursor object using cursor() method
+		cursor1 = db1.cursor()
+		# execute SQL query using execute() method.
+		sql1 = "INSERT INTO file (`file_name`, `file_desc`, `file_link`, `file_author`) VALUES ('%s', '%s','%s', '%s');"%(escape_string(d['title']),escape_string(d['description']),escape_string(d['link']),author)
+		# Execute the SQL command
+		sql2 = "SELECT LAST_INSERT_ID();"
+		cursor1.execute(sql1)
+		cursor1.execute(sql2)
+		results=cursor1.fetchone()
+		file_ids.append("f"+str(results[0]))
+		db1.commit()
+	except Exception as e:
+		db1.rollback()
+		print 'Content-Type: text/html\n'
+		error.errorMessage("Problem in session creation",e)
+		
+	db1.close()
+	
+def updateVideo(k):
+	d=eval(str(k))
+	try:
+		# Open database connection
+		db1 = MySQLdb.connect("fdb13.runhosting.com","1780205_seekho","tilak05051995","1780205_seekho" )
+		# prepare a cursor object using cursor() method
+		cursor1 = db1.cursor()
+		# execute SQL query using execute() method.
+		sql1 = "INSERT INTO video (`video_title`, `video_desc`, `video_link`, `video_author`) VALUES ('%s', '%s','%s', '%s');"%(escape_string(d['title']),escape_string(d['description']),escape_string(d['link']),author)
+		# Execute the SQL command
+		sql2 = "SELECT LAST_INSERT_ID();"
+		cursor1.execute(sql1)
+		cursor1.execute(sql2)
+		results=cursor1.fetchone()
+		video_ids.append("v"+str(results[0]))
+		db1.commit()
+	except Exception as e:
+		db1.rollback()
+		print 'Content-Type: text/html\n'
+		error.errorMessage("Problem in session creation",e)
+		
+	db1.close()
+	
+def updateMain(k):
+	d=eval(str(k))
+	try:
+		# Open database connection
+		db1 = MySQLdb.connect("fdb13.runhosting.com","1780205_seekho","tilak05051995","1780205_seekho" )
+		# prepare a cursor object using cursor() method
+		cursor1 = db1.cursor()
+		# execute SQL query using execute() method.
+		sql1 = "INSERT INTO courses (`course_title`, `course_desc`, `course_content`,`course_author`,`course_category`,`course_duration`) VALUES ('%s', '%s','%s', '%s','%s','%s');"%(escape_string(d['title']),escape_string(d['description']),escape_string(str(text_ids+video_ids+file_ids)),author,escape_string(d['category']),escape_string(d['duration']))
+		# Execute the SQL command
+		sql2 = "SELECT LAST_INSERT_ID();"
+		cursor1.execute(sql1)
+		cursor1.execute(sql2)
+		results=cursor1.fetchone()
+		course_id=str(results[0])
+		db1.commit()
+	except Exception as e:
+		db1.rollback()
+		print 'Content-Type: text/html\n'
+		error.errorMessage("Problem in session creation",e)
+		
+	return course_id
+	db1.close()
+	
+q = form.getvalue('query',"#123None#").strip()
+if q !="#123None#":
+	t=verify.verifySession()
+	author=t[1]
+	if t[0] and t[1]!="":
+		dic=json.loads(q)
+		if list(dic['text']):
+			for k in list(dic['text']):
+				updateText(k)
+		if list(dic['video']):
+			for k in list(dic['video']):
+				updateVideo(k)
+		if list(dic['file']):
+			for k in list(dic['file']):
+				updateFile(k)
+		if dic['main']!={}:
+			print 'Content-Type: text/html\n'
+			print "Success"+str(updateMain(dic['main']))
+	else:
+		print 'Content-Type: text/html\n'
+		error.errorMessage("Oops ! Something Went Wrong!","Unable to verify your login attempt.")

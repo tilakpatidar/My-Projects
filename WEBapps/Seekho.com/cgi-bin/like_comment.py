@@ -1,0 +1,66 @@
+#!/usr/bin/python
+# Import modules for CGI handling 
+import cgi, cgitb,MySQLdb,verify,time,error,urllib2
+cgitb.enable()
+form = cgi.FieldStorage() 
+# Get data from fields
+def getLiked(idd):
+	db1 = MySQLdb.connect("fdb13.runhosting.com","1780205_seekho","tilak05051995","1780205_seekho" )
+	try:
+		# prepare a cursor object using cursor() method
+		cursor1 = db1.cursor()
+		# execute SQL query using execute() method.
+		sql1 = "SELECT `comment_liked` from `comment` WHERE `comment_id`='%s'"%(idd)
+		cursor1.execute(sql1)
+		results=cursor1.fetchone()
+		if results[0]=="":
+			return []
+		else:
+			return eval(results[0])
+		db1.commit()
+	except Exception as e:
+		db1.rollback()
+		print 'Content-Type: text/html\n'
+		error.errorMessage("Problem in session creation",e)
+	return False
+	db1.close()
+def likeComment(idd,li):
+	li.append(t[1])
+	db1 = MySQLdb.connect("fdb13.runhosting.com","1780205_seekho","tilak05051995","1780205_seekho" )
+	try:
+		# prepare a cursor object using cursor() method
+		cursor1 = db1.cursor()
+		# execute SQL query using execute() method.
+		sql1 = "UPDATE `comment` SET `comment_like`=`comment_like`+1,`comment_liked`='%s' WHERE `comment_id`='%s';"%(MySQLdb.escape_string(str(li)),idd)
+
+		cursor1.execute(sql1)
+		db1.commit()
+		return True
+	except Exception as e:
+		db1.rollback()
+		print 'Content-Type: text/html\n'
+		error.errorMessage("Problem in session creation",e)
+	return False
+	db1.close()
+idd = form.getvalue('id',"#123None#").strip()
+idd=urllib2.unquote(idd)
+if idd !="#123None#":
+	t=verify.verifySession()
+	if t[0] and t[1]!="":
+		li=getLiked(idd)
+		if isinstance(li, (list)):
+
+			if t[1] in li:
+				print 'Content-Type: text/html\n'
+				print "###already###"
+			else:
+				if likeComment(idd,li):
+					print 'Content-Type: text/html\n'
+					print "###success###"
+			
+		else:
+			print 'Content-Type: text/html\n'
+			print "###not logged in###"	
+	else:
+		print 'Content-Type: text/html\n'
+		print "###not logged in###"

@@ -1,0 +1,43 @@
+#!/usr/bin/python
+# Import modules for CGI handling 
+import cgi,MySQLdb,hashlib,sha, time, Cookie, os,math,error
+#print 'Content-Type: text/html\n'
+def verifySession(sid):
+	try:
+		# Open database connection
+		db1 = MySQLdb.connect("localhost","root","1","seekho.com" )
+		# prepare a cursor object using cursor() method
+		cursor1 = db1.cursor()
+		# execute SQL query using execute() method.
+		sql1="SELECT username from session where sid='%s'"%(sid)
+		#print sql1
+		# Execute the SQL command
+		cursor1.execute(sql1)
+		username=""
+		results1=cursor1.fetchone()
+		username=results1[0]
+		db1.commit()
+	except:
+		db1.rollback()
+		error.errorMessage("Problem in session creation","Invalid username and password combination or try clearing your cookie data.")
+
+	db1.close()
+	return username
+
+#Loading sid from cookie
+cookie = Cookie.SimpleCookie()
+string_cookie = os.environ.get('HTTP_COOKIE')
+if string_cookie is None:
+	print  "<SCRIPT type='text/javascript'>window.location.href='/login';</SCRIPT>"
+else:
+	cookie.load(string_cookie)
+	sid = cookie['sid'].value
+	temp=verifySession(sid)
+	username=str(temp)
+	course=typee[:1]
+	if username !="":
+		print  "<SCRIPT type='text/javascript'>window.location.href='/cgi-bin/student.py';</SCRIPT>"
+	else:
+		#clear all cookie data see to it
+		error.errorMessage("Problem in session creation","Invalid username and password combination or try clearing your cookie data.")
+	

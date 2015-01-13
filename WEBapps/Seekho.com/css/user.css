@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22 Dec, 2014, 10:01:27 PM
+    Author     : tilak
+*/
+.course_text{
+    font-size: 24px;
+    font-family: 'Proxima Nova Semibold',sans-serif;
+    line-height: 1.13;
+    display:block;
+    text-align:center;
+    color: black;
+}
+.glyph_course_text{
+    padding-top:30px;
+    font-size: 32px;
+    font:calibri;
+    display:block;
+    text-align:center;
+    color: black;
+}
+

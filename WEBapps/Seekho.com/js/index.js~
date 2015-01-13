@@ -1,0 +1,5 @@
+$(document).ready(function(){
+$('#option').on('change',function(){
+$("#option option:selected").attr('selected','selected');
+});
+});
