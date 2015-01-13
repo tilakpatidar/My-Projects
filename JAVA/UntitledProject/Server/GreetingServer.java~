@@ -1,0 +1,317 @@
+import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import javax.swing.JOptionPane;
+/**
+ *
+ * @author tilak
+ */
+
+
+class Credentials {
+    private static String username;
+    private static String password;
+    private static Logger log;
+    static {
+    log=new Logger();
+    }
+    public static void setPassword(String pswd){
+        Credentials.password=Credentials.encrypt(pswd);
+    }
+    public static void setUsername(String username){
+        Credentials.username=Credentials.encrypt(username);
+    }
+    public static String encrypt(String a){
+        MessageDigest md;
+        StringBuffer sb = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+            md.update(a.getBytes());
+            byte[] temp=md.digest();
+            sb=new StringBuffer();
+            for(byte aa :temp){
+                sb.append(Integer.toString((aa&0xff)+0x100,16));
+            }
+        } catch (NoSuchAlgorithmException ex) {
+           log.write(ex.getMessage());
+        }
+        String temp=sb.toString().concat("tilak@Google05-05-1995#IndiaSal$100000$");
+        //adding salt
+        MessageDigest md1;
+        StringBuffer sb1 = null;
+        try {
+            md1 = MessageDigest.getInstance("MD5");
+            md1.update(temp.getBytes());
+            byte[] temp1=md1.digest();
+            sb1=new StringBuffer();
+            for(byte aa :temp1){
+                sb1.append(Integer.toString((aa&0xff)+0x100,16));
+            }
+        } catch (NoSuchAlgorithmException ex) {
+           log.write(ex.getMessage());
+        }
+       return sb1.toString();
+    }
+    public static String getPassword(){
+        
+        return Credentials.password;
+    }
+    public static String getUsername(){
+        return Credentials.username;
+    }
+}
+
+class Logger {
+    private static File log;
+    public static FileWriter out;
+    Logger(){
+     
+        
+    }
+    static{
+         try {
+         
+            log=new File(System.getProperty("user.home")+File.separator+"ShitBoxServer.log");
+          boolean createNewFile = log.createNewFile();
+            out=new FileWriter(log);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void write(String line){
+        try {
+            out.append(line+"\n");
+            out.flush();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @Override
+    public void finalize(){
+        try {
+            out.close();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
+
+public class GreetingServer extends Thread
+{
+   private ServerSocket serverSocket;
+   private static Logger log;
+   private static final String MYSQL_HOSTNAME="localhost";
+   private static final String MYSQL_PORT="3306";
+   private static final String MYSQL_USER="root";
+   private static final String MYSQL_DB="shitbox";
+   private static final String MYSQL_PSWD="1";
+   public GreetingServer(int port) throws IOException
+   {
+      serverSocket = new ServerSocket(port);
+      serverSocket.setSoTimeout(0);
+      log=new Logger();
+   }
+
+   @Override
+   public void run()
+   {
+       while(true){
+        try
+            {
+            Socket server = serverSocket.accept();
+
+
+                 log.write("Waiting for client on port " +serverSocket.getLocalPort() + "...");
+
+                 while(server.isConnected()){
+                    //##Test## System.out.println("1");
+                         log.write("Just connected to "+ server.getRemoteSocketAddress());
+                         DataInputStream in =new DataInputStream(server.getInputStream());
+                         DataOutputStream out =new DataOutputStream(server.getOutputStream());
+                         String temp =in.readUTF();
+                         System.out.println(temp);
+                         if(this.validConnection(temp)){
+                          //##Test##  System.out.println("2");
+                           log.write("Connection Verified "+ server.getRemoteSocketAddress());
+                           long init_time=System.currentTimeMillis();
+                           boolean timed_out=false;//True when timed out
+                          
+                           while(true)
+                           {
+                               try {
+                                   Thread.sleep(2000);
+                               } catch (InterruptedException ex) {
+                                   java.util.logging.Logger.getLogger(GreetingServer.class.getName()).log(Level.SEVERE, null, ex);
+                               }
+                               //Should wait here for browser to login
+                               //wait time 10 min
+                               if(this.isActive(temp)){
+                                  log.write("User active");
+                               //##Test##    System.out.println("3");
+                                   break;
+                                   
+                               }
+                                   
+                               if((System.currentTimeMillis()-init_time)>6000){
+                               //##Test##    System.out.println("4");
+                                   timed_out=true;
+                                   break;
+                               }
+
+                           }
+                           if(timed_out){
+                               log.write("User timed out");
+                               out.writeUTF("<flag>TIMED_OUT</flag>");
+                               out.flush();
+                               server.close();
+                              //##Test## System.out.println("5");
+                           }
+                           else{
+                               System.out.println("Please input :");
+                               Console c=System.console();
+                               String data="<terminal id=\"id\"><command>"+c.readLine()+"</command></terminal>";
+                               out.writeUTF("<flag>AUTHORIZED</flag><data>"+JOptionPane.showInputDialog("")+"</data>");
+                               out.flush();
+                             //##Test##  System.out.println("6");
+                               server.close();
+                           }
+
+                         }
+                         else{
+                               out.writeUTF("<flag>NOT_AUTHORIZED</flag><data></data>");
+                               out.flush();
+                              //##Test## System.out.println("7");
+                               server.close();
+                           }
+
+
+                 }
+                 //server.close(); //Infinite Loop
+
+
+            }
+         catch(SocketTimeoutException s)
+            {
+               log.write("Socket timed out!");
+            }
+         catch(IOException e)
+            {
+               log.write(e.getMessage());
+               
+            }
+         }
+   }
+   public boolean validConnection(String xml){
+       String username;
+       String password;
+       String data=null;
+        try{ 
+            
+           String temp=xml.replace("<root>","");
+           temp=temp.replace("</root>","");
+           String[] t=temp.split("</username>");
+           username=t[0].replace("<username>","");
+           temp=t[1].replace("<password>","");
+           String[] t1=temp.split("</password>");
+           password=t1[0];
+           try{
+           data=t1[1].replace("<data>","").replace("</data>","");
+           }
+           catch(ArrayIndexOutOfBoundsException e){
+               log.write(e.getMessage());
+               data=null;
+           }
+           
+         
+            
+         //##Test##  System.out.println(username);
+          //##Test##  System.out.println(password);
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con; 
+            con = (Connection) DriverManager.getConnection("jdbc:mysql://"+MYSQL_HOSTNAME+":"+MYSQL_PORT+"/"+MYSQL_DB,MYSQL_USER,MYSQL_PSWD);
+            String query="SELECT `username_hash`,`password_hash` FROM auth WHERE username_hash='"+username+"';--";
+            ResultSet rs = con.createStatement().executeQuery(query);
+            String username_hash = null;
+            String password_hash=null;
+           
+            while (rs.first()) {
+               username_hash=rs.getString("username_hash");
+               password_hash=rs.getString("password_hash");
+               break;
+            }
+            con.close();
+            return username.equals(username_hash) && password.equals(password_hash);
+            
+            
+            
+        }
+        catch(ClassNotFoundException | SQLException e){
+                   log.write(e.getMessage());
+                   return false;
+        }
+       
+       
+   }
+   public boolean isActive(String xml){
+       log.write("Checking for active user");
+       String username;
+       try{
+            String temp=xml.replace("<root>","");
+           temp=temp.replace("</root>","");
+           String[] t=temp.split("</username>");
+           username=t[0].replace("<username>","");
+          // System.out.println(username);
+        Class.forName("com.mysql.jdbc.Driver");
+            Connection con; 
+            con = (Connection) DriverManager.getConnection("jdbc:mysql://"+MYSQL_HOSTNAME+":"+MYSQL_PORT+"/"+MYSQL_DB,MYSQL_USER,MYSQL_PSWD);
+            String query="SELECT `active` FROM session WHERE `username_hash`='"+username+"';--";
+            ResultSet rs = con.createStatement().executeQuery(query);
+            String active_flag = null;
+           
+            while (rs.first()) {
+               active_flag=rs.getString("active");
+               break;
+            }
+            System.out.println(active_flag);
+            con.close();
+            if(active_flag!=null) {
+               if (active_flag.equals("1")) {
+                   return true;
+               }
+           }
+            return false;
+            
+            
+            
+        }
+        catch(ClassNotFoundException | SQLException e){
+                   log.write(e.getMessage());
+                   return false;
+        }
+       
+   }
+   public static void main(String [] args)
+   {
+      int port = Integer.parseInt(args[0]);
+      try
+      {
+         GreetingServer g = new GreetingServer(port);
+         Thread t=new Thread(g);
+         t.start();
+      }catch(IOException e)
+      {
+         e.printStackTrace();
+      }
+   }
+   
+}
