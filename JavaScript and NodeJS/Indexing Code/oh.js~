@@ -86,7 +86,7 @@ function dbInsert(u, t, b) {
 var connection = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
-		password: 'pswd',
+		password: '#srmseONserver',
 		database: 'test',
                 connectionLimit:10
 	});

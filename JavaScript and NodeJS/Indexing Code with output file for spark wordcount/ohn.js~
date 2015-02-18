@@ -130,7 +130,7 @@ function dbInsert(u,t,b,uls) {
 var connection = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
-		password: 'pswd',
+		password: '#srmseONserver',
 		database: 'test',
                 connectionLimit:1000,
 multipleStatements:true
@@ -193,7 +193,7 @@ var row = {
 var connection = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
-		password: 'pswd',
+		password: '#srmseONserver',
 		database: 'test',
                 connectionLimit:1000
 	});
