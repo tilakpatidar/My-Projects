@@ -1,0 +1,64 @@
+import google as Google
+import git as GitHub
+import facebook as fb
+import twitter as Twitter
+import sys
+details={}
+sources={}
+def checkDependency():
+	try:
+		from bs4 import BeautifulSoup as bs
+		print "[INFO] bs4 available"
+	except:
+		print "[ERROR] bs4 not installed"
+		print "sudo apt-get install python-bs4"
+		return False
+	try:
+		from pyvirtualdisplay import Display
+		print "[INFO] py virtual display available"
+	except:
+		print "[ERROR] pyvirtualdisplay not installed"
+		print "sudo apt-get install xvfb"
+		print "sudo pip install pyvirtualdisplay"
+		return False
+	try:
+		from selenium import webdriver
+		print "[INFO] selenium available"
+	except:
+		print "sudo apt-get install python-selenium"
+		return False
+	return True
+def main():
+	if checkDependency():
+		getInput()
+		print "[INFO] Input processed . . ."
+		print "[INFO] Preparing the sources . . ."
+		print "[INFO] Setting up Google +"
+		#Google.init(details)
+		global sources
+		#sources["Google"]=Google.parseResults()
+		print "[INFO] Google processed"
+		print "[INFO] Insert Google Data into MySQL"
+		#Google.insertData()
+		print "[INFO] Setting up facebook"
+		#fb.init(details)
+		#sources["Facebook"]=fb.parseResults()
+		print "[INFO] Insert Facebook Data into MySQL"
+		#fb.insertData()
+		print "[INFO] Setting up Twitter"
+		Twitter.init(details)
+		sources["Twitter"]=Twitter.parseResults()
+		print "[INFO] Insert Twitter Data into MySQL"
+		Twitter.insertData()
+		#print sources
+def getInput():
+	global details
+	print "Please provide the following details"
+	details["First_Name"]=raw_input("First Name :")
+	details["Last Name"]=raw_input("Last Name :")
+	details["Place"]=raw_input("Place :")
+	details["Gender"]=raw_input("Gender :")
+	details["Institution"]=raw_input("Institution :")
+	details["Keywords"]=raw_input("Keywords :")
+if __name__=="__main__":
+	main()
